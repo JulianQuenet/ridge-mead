@@ -1,37 +1,52 @@
 import React, { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-import { PointerLockControls, Box } from "@react-three/drei";
+import { PointerLockControls, Box, PerspectiveCamera } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
+import { Raycaster, Vector3 } from "three";
 
 const Controls = () => {
   const controlsRef = useRef<any>();
-  const bodyRef = useRef<any>()
+  const bodyRef = useRef<any>();
+  
+  const targetRef = useRef<any>();
   const isLocked = useRef(false);
   const [moveForward, setMoveForward] = useState(false);
   const [moveBackward, setMoveBackward] = useState(false);
   const [moveLeft, setMoveLeft] = useState(false);
   const [moveRight, setMoveRight] = useState(false);
+  const [wall, setWall] = useState(false)
 
+  const rayCast = new Raycaster
   useFrame(() => {
     const velocity = 0.05;
+    let x = controlsRef.current.camera.position.x
+    let z = controlsRef.current.camera.position.z
+
+    rayCast.setFromCamera(controlsRef.current.camera.position, controlsRef.current.camera);
+    
+    const hitWall = rayCast.intersectObject(targetRef.current)
+    if(hitWall.length > 0 ){
+      controlsRef.current.camera.position.x = x*0.1
+      controlsRef.current.camera.position.z = z*0.1
+    }
+    
     if (moveForward) {
       controlsRef.current.moveForward(velocity);
     } else if (moveLeft) {
       controlsRef.current.moveRight(-velocity);
     } else if (moveBackward) {
       controlsRef.current.moveForward(-velocity);
+      
     } else if (moveRight) {
       controlsRef.current.moveRight(velocity);
+      
     }
-
-    let x = controlsRef.current.camera.position.x
-    const z = controlsRef.current.camera.position.z
- 
-    
-   
+    bodyRef.current.setTranslation({x:x,y:1.2,z:z},true)
   });
-
-  const onKeyDown = function (event:any) {
+   
+  
+  const onKeyDown =  (event:any) =>{
+    
     switch (event.code) {
       case "ArrowUp":
       case "KeyW":
@@ -41,16 +56,19 @@ const Controls = () => {
       case "ArrowLeft":
       case "KeyA":
         setMoveLeft(true);
+        
         break;
 
       case "ArrowDown":
       case "KeyS":
         setMoveBackward(true);
+        
         break;
 
       case "ArrowRight":
       case "KeyD":
         setMoveRight(true);
+        
         break;
       default:
         return;
@@ -93,11 +111,10 @@ const Controls = () => {
       onUpdate={() => {
         if (controlsRef.current) {
           controlsRef.current.addEventListener("lock", () => {
-            console.log("lock");
             isLocked.current = true;
           });
           controlsRef.current.addEventListener("unlock", () => {
-            console.log("unlock");
+           
             isLocked.current = false;
           });
         }
@@ -105,11 +122,19 @@ const Controls = () => {
       ref={controlsRef}
     />
     
-    <RigidBody type="dynamic" position={[0,2,3]}>
-      <Box  ref={bodyRef} castShadow >
+    <RigidBody type="dynamic" ref={bodyRef} colliders={"ball"}>
+      <Box castShadow >
         <meshStandardMaterial color="green"/>
       </Box>
     </RigidBody>
+
+    
+
+    <RigidBody type="fixed">
+        <Box castShadow position={[0, 1, 0]} args={[5,5,10]} ref={targetRef}>
+          <meshStandardMaterial color="darkslategrey" />
+        </Box>
+      </RigidBody>
    </> 
   );
 };
