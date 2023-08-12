@@ -57,7 +57,6 @@ const BaseCharacter = (props: any) => {
     if (jump && Math.abs(velocity.current[1].toFixed(2)) < 0.05)
       api.velocity.set(velocity.current[0], 4, velocity.current[2]);
 
-    
   });
 
   return (

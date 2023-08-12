@@ -23,8 +23,8 @@ const Scene = () => {
         </Box>
       </RigidBody>
 
-      <RigidBody type="fixed" name="floor" friction={0.75}>
-        <Box position={[0, 0, 0]} args={[100, 1, 100]} receiveShadow>
+      <RigidBody type="fixed" name="floor" friction={0.5}>
+        <Box position={[0, 0, 0]} args={[250, 1, 250]} receiveShadow>
           <meshStandardMaterial color="white" />
         </Box>
       </RigidBody>

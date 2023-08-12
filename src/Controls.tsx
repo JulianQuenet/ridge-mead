@@ -1,141 +1,99 @@
-import React, { useRef, useState } from "react";
-import { useFrame } from "@react-three/fiber";
-import { PointerLockControls, Box, PerspectiveCamera } from "@react-three/drei";
+import { useRef, useEffect } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { PointerLockControls, Box, Sphere } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
-import { Raycaster, Vector3 } from "three";
+import usePlayerControls from "./components/controls";
+import * as THREE from "three";
+import { Flashlight } from "./components/Flash-lite_flashlight";
 
-const Controls = () => {
-  const controlsRef = useRef<any>();
-  const bodyRef = useRef<any>();
-  
-  const targetRef = useRef<any>();
-  const isLocked = useRef(false);
-  const [moveForward, setMoveForward] = useState(false);
-  const [moveBackward, setMoveBackward] = useState(false);
-  const [moveLeft, setMoveLeft] = useState(false);
-  const [moveRight, setMoveRight] = useState(false);
-  const [wall, setWall] = useState(false)
+const Controls = (props: any) => {
+  const flashRef = useRef<any>();
+  const direction = new THREE.Vector3();
+  const frontVector = new THREE.Vector3();
+  const sideVector = new THREE.Vector3();
+  const SPEED = 0.175;
+  const playerRef = useRef<any>();
 
-  const rayCast = new Raycaster
+  const { camera } = useThree();
+
+  const { forward, backward, left, right, jump } = usePlayerControls();
+  const velocity = useRef<any>([0, 0, 0]);
+  useEffect(() => {
+    camera.rotation.y = 0;
+    camera.rotation.x = 0;
+    camera.rotation.z = 0;
+  }, []);
+
   useFrame(() => {
-    const velocity = 0.05;
-    let x = controlsRef.current.camera.position.x
-    let z = controlsRef.current.camera.position.z
+    if (playerRef.current) {
+      const position = playerRef.current.translation();
+      // Setting camera position
+      camera.position.x = position.x;
+      camera.position.y = position.y + 1;
+      camera.position.z = position.z;
+      // Update flashlight's position with offsets relative to camera
+      flashRef.current.position.x = camera.position.x;
+      flashRef.current.position.y = camera.position.y;
+      flashRef.current.position.z = camera.position.z - 0.3;
+      //Setting up flashlight rotation
+      const cameraDirection = new THREE.Vector3();
+      camera.getWorldDirection(cameraDirection);
+      flashRef.current.lookAt(
+        camera.position.x + cameraDirection.x,
+        camera.position.y + cameraDirection.y,
+        camera.position.z + cameraDirection.z
+      );
 
-    rayCast.setFromCamera(controlsRef.current.camera.position, controlsRef.current.camera);
-    
-    const hitWall = rayCast.intersectObject(targetRef.current)
-    if(hitWall.length > 0 ){
-      controlsRef.current.camera.position.x = x*0.1
-      controlsRef.current.camera.position.z = z*0.1
+      frontVector.set(0, 0, Number(backward) - Number(forward));
+      sideVector.set(Number(left) - Number(right), 0, 0);
+      direction
+        .subVectors(frontVector, sideVector)
+        .normalize()
+        .multiplyScalar(SPEED)
+        .applyEuler(camera.rotation);
+
+      playerRef.current.applyImpulse(
+        { x: direction.x, y: velocity.current[1], z: direction.z },
+        true
+      );
+      playerRef.current.setAdditionalMass(0.5);
+      if (
+        jump &&
+        Math.abs(playerRef.current.translation().y.toFixed(2)) < 1.5
+      ) {
+        playerRef.current.applyImpulse(
+          { x: velocity.current[0], y: 1, z: velocity.current[2] },
+          true
+        );
+      }
     }
-    
-    if (moveForward) {
-      controlsRef.current.moveForward(velocity);
-    } else if (moveLeft) {
-      controlsRef.current.moveRight(-velocity);
-    } else if (moveBackward) {
-      controlsRef.current.moveForward(-velocity);
-      
-    } else if (moveRight) {
-      controlsRef.current.moveRight(velocity);
-      
-    }
-    bodyRef.current.setTranslation({x:x,y:1.2,z:z},true)
   });
-   
-  
-  const onKeyDown =  (event:any) =>{
-    
-    switch (event.code) {
-      case "ArrowUp":
-      case "KeyW":
-        setMoveForward(true);
-        break;
-
-      case "ArrowLeft":
-      case "KeyA":
-        setMoveLeft(true);
-        
-        break;
-
-      case "ArrowDown":
-      case "KeyS":
-        setMoveBackward(true);
-        
-        break;
-
-      case "ArrowRight":
-      case "KeyD":
-        setMoveRight(true);
-        
-        break;
-      default:
-        return;
-    }
-  };
-
-  const onKeyUp = function (event:any) {
-    switch (event.code) {
-      case "ArrowUp":
-      case "KeyW":
-        setMoveForward(false);
-        break;
-
-      case "ArrowLeft":
-      case "KeyA":
-        setMoveLeft(false);
-        break;
-
-      case "ArrowDown":
-      case "KeyS":
-        setMoveBackward(false);
-        break;
-
-      case "ArrowRight":
-      case "KeyD":
-        setMoveRight(false);
-        break;
-
-      default:
-        return;
-    }
-  };
-
-  window.addEventListener("keydown", onKeyDown);
-  window.addEventListener("keyup", onKeyUp);
 
   return (
     <>
-        <PointerLockControls
-      onUpdate={() => {
-        if (controlsRef.current) {
-          controlsRef.current.addEventListener("lock", () => {
-            isLocked.current = true;
-          });
-          controlsRef.current.addEventListener("unlock", () => {
-           
-            isLocked.current = false;
-          });
-        }
-      }}
-      ref={controlsRef}
-    />
-    
-    <RigidBody type="dynamic" ref={bodyRef} colliders={"ball"}>
-      <Box castShadow >
-        <meshStandardMaterial color="green"/>
-      </Box>
-    </RigidBody>
+      <PointerLockControls />
 
-    
+      <RigidBody
+        position={[5, 3, 0]}
+        type="dynamic"
+        ref={playerRef}
+        colliders={"trimesh"}
+      >
+        <Box castShadow>
+          <meshStandardMaterial color="green" />
+        </Box>
+      </RigidBody>
 
-    <RigidBody type="fixed">
-        <Box castShadow position={[0, 1, 0]} args={[5,5,10]} ref={targetRef}>
+      <RigidBody type="fixed">
+        <Box castShadow position={[0, 1, 0]} args={[5, 5, 10]}>
           <meshStandardMaterial color="darkslategrey" />
         </Box>
       </RigidBody>
-   </> 
+
+      <mesh position={[5, 3, -5]} ref={flashRef}>
+        <Flashlight />
+      </mesh>
+    </>
   );
 };
 

@@ -9,7 +9,7 @@ function App() {
   return (
     <Canvas
       shadows
-      camera={{ position: [10, 3, 3], fov: 60 }}
+      camera={{ fov: 50, position:[5,3,2] }}
     >
       <ambientLight />
       <directionalLight

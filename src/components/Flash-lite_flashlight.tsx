@@ -7,32 +7,31 @@ Source: https://sketchfab.com/3d-models/flash-lite-flashlight-e20e52c7a0eb466086
 Title: Flash-Lite Flashlight
 */
 
-import React, { useRef } from 'react'
+
 import { useGLTF } from '@react-three/drei'
-import { useBox, useSphere, useTrimesh } from '@react-three/cannon'
+import { useRef } from 'react'
+import { useFrame, useThree } from '@react-three/fiber'
 
-export const Flashlight =(props:any) => {
 
-  const [ref]: any = useTrimesh(() => ({
-    mass: 1,
-    type: "Dynamic",
-    position:[0,5,5],
-    ...props,
-  }));
+export const Flashlight =() => {
+
+const flashRef = useRef<any>()
 
   const { nodes, materials }:any = useGLTF('/flash-lite_flashlight.glb')
-  
   return (
-    <group dispose={null} ref={ref} >
-      <group rotation={[-Math.PI / 2, 0, 0]} >
-        <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-          <group rotation={[-Math.PI / 2, 0, 0]} scale={100} >
+    
+      <group dispose={null}  ref={flashRef}>
+      <group rotation={[Math.PI / 2, 0, 0]} >
+        <group rotation={[-Math.PI / 2, 0, 0]} scale={0.015}>
+          <group rotation={[Math.PI / 2, 0, 0]} scale={100} >
             <mesh geometry={nodes.Cube012_FlashlightBody_0.geometry} material={materials.FlashlightBody} />
             <mesh geometry={nodes.Cube012_FlashlightGlass_0.geometry} material={materials.FlashlightGlass} />
           </group>
         </group>
       </group>
     </group>
+    
+    
   )
 }
 
