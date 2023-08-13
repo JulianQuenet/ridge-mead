@@ -9,12 +9,6 @@ const Scene = () => {
 
   return (
     <>
-      <ambientLight />
-      <directionalLight
-        position={[-5, 5, 5]}
-        castShadow
-        shadow-mapSize={1024}
-      />
 
       <RigidBody type="dynamic">
         <Box castShadow position={[0, 5, 0]}>
