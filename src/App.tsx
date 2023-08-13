@@ -1,8 +1,9 @@
 
 import { Canvas } from "@react-three/fiber";
-import { Physics, RigidBody} from "@react-three/rapier";
+import { Physics} from "@react-three/rapier";
 import Controls from "./Controls";
 import Scene from "./scene";
+
 
 
 function App() {

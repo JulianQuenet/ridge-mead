@@ -10,7 +10,7 @@ Title: Flash-Lite Flashlight
 
 import { useGLTF } from '@react-three/drei'
 import { useRef } from 'react'
-import { useFrame, useThree } from '@react-three/fiber'
+
 
 
 export const Flashlight =() => {
@@ -20,7 +20,7 @@ const flashRef = useRef<any>()
   const { nodes, materials }:any = useGLTF('/flash-lite_flashlight.glb')
   return (
     
-      <group dispose={null}  ref={flashRef}>
+      <group dispose={null}  ref={flashRef} castShadow>
       <group rotation={[Math.PI / 2, 0, 0]} >
         <group rotation={[-Math.PI / 2, 0, 0]} scale={0.015}>
           <group rotation={[Math.PI / 2, 0, 0]} scale={100} >
