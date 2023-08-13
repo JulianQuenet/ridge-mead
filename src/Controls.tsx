@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useRef, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { PointerLockControls, Box, Capsule } from "@react-three/drei";
@@ -111,30 +110,6 @@ const Controls = () => {
       </mesh>
     </>
   );
-=======
-import { useState, useEffect } from 'react';
-
- const usePlayerControls = () => {
-  const keys:any = { KeyW: 'forward', KeyS: 'backward', KeyA: 'left', KeyD: 'right', Space: 'jump' };
-  const moveFieldByKey = (key:any) => keys[key];
-
-  const [movement, setMovement] = useState({ forward: false, backward: false, left: false, right: false, jump: false });
-
-  useEffect(() => {
-    const handleKeyDown = (e:any) => setMovement((m) => ({ ...m, [moveFieldByKey(e.code)]: true }));
-    const handleKeyUp = (e:any) => setMovement((m) => ({ ...m, [moveFieldByKey(e.code)]: false }));
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
-    };
-  }, []);
-
-  return movement;
->>>>>>> db99f5d9e8511e7c2f55462a193850d8bf173388
 };
 
-export default usePlayerControls
+export default Controls;
