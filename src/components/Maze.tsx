@@ -13,7 +13,7 @@ import { useGLTF } from '@react-three/drei'
 const Maze =(props:any)=> {
   const { nodes, materials }:any = useGLTF('/maze.glb')
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} castShadow receiveShadow>
       <mesh geometry={nodes.Object_2.geometry} material={materials.palette} rotation={[-Math.PI / 2, 0, 0]} />
     </group>
   )

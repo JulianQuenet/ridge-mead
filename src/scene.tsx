@@ -17,11 +17,8 @@ const Scene = () => {
       </RigidBody>
 
       <RigidBody type="fixed" position={[5,1,0]} colliders={"trimesh"}> 
-      <Maze />
+        <Maze />
       </RigidBody>
-     
-        
-      
       
     </>
   );
