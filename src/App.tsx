@@ -18,7 +18,7 @@ function App() {
         shadow-mapSize={1024}
       />
       <color attach="background" args={["lightblue"]} />
-      <Physics debug>
+      <Physics>
         <Controls />
         <Scene/>
       </Physics>

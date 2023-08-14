@@ -8,7 +8,8 @@ import { Flashlight } from "./components/Flash-lite_flashlight";
 
 const Controls = () => {
   const flashRef = useRef<any>();
-  const lightRef = useRef<any>();
+  const lightRef1 = useRef<any>();
+  const lightRef2 = useRef<any>();
   const direction = new THREE.Vector3();
   const frontVector = new THREE.Vector3();
   const sideVector = new THREE.Vector3();
@@ -32,12 +33,12 @@ const Controls = () => {
       // Setting camera position and creating walking/breathing affect
       camera.position.x = position.x;
       if (right || left || forward || backward) {
-        camera.position.y = position.y + Math.sin(time * 15) * 0.05 + 0.75;
+        camera.position.y = position.y + Math.sin(time * 15) * 0.05 + 1;
       } else
         camera.position.y =
           position.y +
           Math.sin(time * 5 + camera.position.x + camera.position.z) * 0.05 +
-          0.75;
+          1;
       camera.position.z = position.z;
 
       //Player movement base on camera direction/rotation
@@ -68,8 +69,8 @@ const Controls = () => {
 
   function setFlash() {
     requestAnimationFrame(setFlash);
+    const time = Date.now() * 0.0005;
     if (flashRef.current && camera) {
-      const time = Date.now() * 0.0005;
       // Update flashlight's position with offsets relative to camera
       flashRef.current.position.copy(camera.position);
       (flashRef.current.position.y =
@@ -82,20 +83,30 @@ const Controls = () => {
       flashRef.current.translateZ(-0.45);
       flashRef.current.translateX(0.2);
     }
-    if (lightRef.current && flashRef.current) {
-      lightRef.current.power = 4000;
-      lightRef.current.angle = 0.35;
-      lightRef.current.distance = 25;
-      flashRef.current.add(lightRef.current);
-      flashRef.current.add(lightRef.current.target);
-      lightRef.current.target.position.z = -4;
-      lightRef.current.target.position.y = 0.25;
+    if (lightRef1.current && flashRef.current) {
+      //Light 1
+      lightRef1.current.intensity = 200;
+      lightRef1.current.angle = 0.355;
+      lightRef1.current.distance = 25;
+      flashRef.current.add(lightRef1.current);
+      flashRef.current.add(lightRef1.current.target);
+      lightRef1.current.target.position.z = -8;
+      lightRef1.current.target.position.y = -1;
+      //Light 2
+      lightRef2.current.intensity = 120;
+      lightRef2.current.angle = 0.325 + Math.sin(time *300) * 0.000885
+      lightRef2.current.distance = 35;
+      flashRef.current.add(lightRef2.current);
+      flashRef.current.add(lightRef2.current.target);
+      lightRef2.current.target.position.z = -8;
+      lightRef2.current.target.position.y = -1;
     }
   }
 
   return (
     <>
-      <spotLight ref={lightRef} name="spotlight 1" />
+      <spotLight ref={lightRef1} name="spotlight 1" />
+      <spotLight ref={lightRef2} name="spotlight 2" />
       <PointerLockControls />
 
       <RigidBody
@@ -105,7 +116,7 @@ const Controls = () => {
         colliders={"trimesh"}
         args={[2, 2, 2]}
       >
-        <Capsule castShadow receiveShadow args={[2.25, 0.05, 0.2]}>
+        <Capsule castShadow receiveShadow>
           <meshStandardMaterial />
         </Capsule>
       </RigidBody>
