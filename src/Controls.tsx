@@ -6,6 +6,7 @@ import usePlayerControls from "./components/controls";
 import * as THREE from "three";
 import { Flashlight } from "./components/Flash-lite_flashlight";
 
+
 const Controls = () => {
   const flashRef = useRef<any>();
   const lightRef1 = useRef<any>();
@@ -52,7 +53,7 @@ const Controls = () => {
         .multiplyScalar(SPEED)
         .applyEuler(camera.rotation);
 
-      if (Math.ceil(playerRef.current.translation().y) > 1) {
+      if (Math.ceil(playerRef.current.translation().y) > 2) {
         playerRef.current.setLinvel(
           { x: direction.x, y: -2.0, z: direction.z },
           true
@@ -65,6 +66,9 @@ const Controls = () => {
       }
 
       playerRef.current.setAdditionalMass(0.5);
+      if(right){
+        console.log(playerRef.current.translation())
+      }
     }
     setFlash();
   });
@@ -89,29 +93,29 @@ const Controls = () => {
       //Light 1
       lightRef1.current.intensity = 20;
       lightRef1.current.angle = 1;
-      lightRef1.current.distance = 4;
+      lightRef1.current.distance = 10;
       lightRef1.current.decay = 2
-      lightRef1.current.penumbra = 0.1;
+      lightRef1.current.penumbra = 0.8;
       flashRef.current.add(lightRef1.current);
       flashRef.current.add(lightRef1.current.target);
       lightRef1.current.target.position.z = -15;
-      lightRef1.current.target.position.y = -1.5;
+      lightRef1.current.target.position.y = -4;
       //Light 2
-      lightRef2.current.intensity = 70;
+      lightRef2.current.intensity = 30;
       lightRef2.current.angle = 0.45 + Math.sin(time *300) * 0.0015
-      lightRef2.current.distance = 35;
+      lightRef2.current.distance = 50;
       lightRef2.current.decay = 2
-      lightRef2.current.penumbra = 0.1;
+      lightRef2.current.penumbra = 0.3;
       flashRef.current.add(lightRef2.current);
       flashRef.current.add(lightRef2.current.target);
       lightRef2.current.target.position.z = -8;
       lightRef2.current.target.position.y = -1.25;
       //Light 3
-      lightRef3.current.intensity = 30;
-      lightRef3.current.angle = 0.4 + Math.sin(time *300) * 0.001
-      lightRef3.current.distance = 45;
+      lightRef3.current.intensity = 70;
+      lightRef3.current.angle = 0.35 + Math.sin(time *300) * 0.001
+      lightRef3.current.distance = 70;
       lightRef3.current.decay = 2
-      lightRef3.current.penumbra = 0.1;
+      lightRef3.current.penumbra = 0.5;
       flashRef.current.add(lightRef3.current);
       flashRef.current.add(lightRef3.current.target);
       lightRef3.current.target.position.z = -8;
@@ -122,27 +126,21 @@ const Controls = () => {
 
   return (
     <>
-      <spotLight ref={lightRef1} name="spotlight 1" />
-      <spotLight ref={lightRef2} name="spotlight 2" color={"0xCCCCCC"}/>
-      <spotLight ref={lightRef3} name="spotlight 3" color={"0xCCCCCC"}/>
+      <spotLight castShadow ref={lightRef1} name="spotlight 1" />
+      <spotLight ref={lightRef2} name="spotlight 2" />
+      <spotLight ref={lightRef3} name="spotlight 3"/>
       <PointerLockControls />
 
       <RigidBody
-        position={[5, 3, 0]}
+        position={[40.5, 8, 0.21]}
         type="dynamic"
         ref={playerRef}
-        colliders={"trimesh"}
+        colliders={"ball"}
         args={[2, 2, 2]}
       >
-        <Capsule castShadow receiveShadow>
+        <Capsule castShadow receiveShadow args={[0.68,0.6,0.6]}>
           <meshStandardMaterial />
         </Capsule>
-      </RigidBody>
-
-      <RigidBody type="fixed">
-        <Box castShadow position={[0, 1, 0]} args={[5, 5, 10]}>
-          <meshStandardMaterial color="darkslategrey" />
-        </Box>
       </RigidBody>
 
       <mesh position={[5, 3, -5]} ref={flashRef}>
