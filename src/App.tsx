@@ -11,12 +11,12 @@ function App() {
       shadows
       camera={{ fov: 50, position:[5,3,2] }}
     >
-      <ambientLight />
+      {/* <ambientLight/>
       <directionalLight
         position={[-5, 5, 5]}
         castShadow
-        shadow-mapSize={1024}
-      />
+        shadow-mapSize={5024}
+      /> */}
       <color attach="background" args={["lightblue"]} />
       <Physics>
         <Controls />
