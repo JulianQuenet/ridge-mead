@@ -4,9 +4,28 @@ import {
 
 import { RigidBody } from "@react-three/rapier";
 import Maze from "./components/Maze";
-
+import n from "./assets/textures/wall-normal.jpg"
+import r from "./assets/textures/wall-rough.jpg"
+import { useLoader } from "@react-three/fiber";
+import { RepeatWrapping, TextureLoader } from "three";
+import { useEffect } from "react";
 
 const Scene = () => {
+
+  const [normal, rough] = useLoader(TextureLoader, [
+    n,
+    r
+  ])
+
+  useEffect(() => {
+    [normal, rough].forEach((t) => {
+      t.wrapS = RepeatWrapping;
+      t.wrapT = RepeatWrapping;
+      t.repeat.set(5, 5);
+      t.offset.set(0, 0);
+    });
+  }, [normal, rough]);
+
 
   return (
     <>
@@ -16,9 +35,12 @@ const Scene = () => {
         </Box>
       </RigidBody>
       
-      <Box position={[-5,25,5]} name="moon">
-      <meshStandardMaterial color="white" />
+      <RigidBody position={[-5,25,5]}>
+      <Box castShadow receiveShadow  name="moon">
+      <meshStandardMaterial color="white" normalMap={normal} roughnessMap={rough}/>
       </Box>
+      </RigidBody>
+      
 
       <RigidBody type="fixed" position={[5,1,0]} colliders={"trimesh"}> 
         <Maze />

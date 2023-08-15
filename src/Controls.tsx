@@ -33,11 +33,14 @@ const Controls = () => {
       playerRef.current.lockRotations(true, true); //Locks rotation because of capsule body
       const position = playerRef.current.translation();
       // Setting camera position and creating walking/breathing affect
-      camera.position.x = position.x
+      camera.position.x = position.x;
       if (right || left || forward || backward) {
         camera.position.y = position.y + Math.sin(time * 15) * 0.05 + 1;
       } else
-        camera.position.y = (position.y + Math.sin(time * 5 + camera.position.x + camera.position.z) * 0.05 + 1);
+        camera.position.y =
+          position.y +
+          Math.sin(time * 5 + camera.position.x + camera.position.z) * 0.05 +
+          1;
       camera.position.z = position.z;
 
       //Player movement base on camera direction/rotation
@@ -108,26 +111,26 @@ const Controls = () => {
       flashRef.current.add(lightRef3.current);
       flashRef.current.add(lightRef3.current.target);
       lightRef3.current.target.position.z = -8;
-      lightRef3.current.target.position.y = -1.;
+      lightRef3.current.target.position.y = -1;
     }
   }
 
   return (
     <>
       <spotLight ref={lightRef1} name="spotlight 1" />
-      <spotLight castShadow  ref={lightRef2} name="spotlight 2" />
-      <spotLight  castShadow ref={lightRef3} name="spotlight 3" />
+      <spotLight castShadow ref={lightRef2} name="spotlight 2" />
+      <spotLight castShadow ref={lightRef3} name="spotlight 3" />
       <PointerLockControls />
 
       <RigidBody
-        position={[46.5, 6, 0.21]}
+        position={[40.5, 6, 0.21]}
         type="dynamic"
         ref={playerRef}
         colliders={"ball"}
         args={[2, 2, 2]}
       >
         <Capsule castShadow receiveShadow args={[0.68, 0.6, 0.6]}>
-          <meshStandardMaterial ref={newRef}/>
+          <meshStandardMaterial ref={newRef} />
         </Capsule>
       </RigidBody>
 

@@ -9,23 +9,39 @@ Title: Maze
 
 import { useEffect } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { Mesh } from 'three'
-import normal from '../../public/textures/wall-normal.jpg'
-
-
+import { Mesh, RepeatWrapping, TextureLoader } from 'three'
+import { useLoader } from '@react-three/fiber'
+import n from "../assets/textures/wall-normal.jpg"
+import r from "../assets/textures/wall-rough.jpg"
 
 const Maze =()=> {
   const { nodes, materials, scene }:any = useGLTF('/maze.glb')
-  
+   
+
+  const [normal, rough] = useLoader(TextureLoader, [
+    n,
+    r
+  ])
+
+  useEffect(() => {
+    [normal, rough].forEach((t) => {
+      t.wrapS = RepeatWrapping;
+      t.wrapT = RepeatWrapping;
+      t.repeat.set(5, 5);
+      t.offset.set(0, 0);
+    });
+  }, [normal, rough]);
 
     useEffect(() => {
     scene.position.set(5, -0.85, 0);
     scene.rotation.set(-0, 0, 0)
     console.log(materials.palette )
-    materials.palette.roughness = (0)
+    materials.palette.roughness = (0.2)
     materials.palette.envMapIntensity = (0.5)
     materials.palette.metalness = (0.5)
     materials.palette.side = (0)
+    materials.palette.roughnessMap = rough
+    materials.palette.normalMap = normal
     scene.traverse((object:any) => {
       if (object instanceof Mesh) {
         object.castShadow = true;
