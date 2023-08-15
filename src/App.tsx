@@ -5,7 +5,6 @@ import Scene from "./scene";
 import { Stars } from "@react-three/drei";
 
 
-
 function App() {
   return (
     <Canvas

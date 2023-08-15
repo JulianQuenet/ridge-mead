@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+
  const usePlayerControls = () => {
   const keys:any = { KeyW: 'forward', KeyS: 'backward', KeyA: 'left', KeyD: 'right' };
   const moveFieldByKey = (key:any) => keys[key];

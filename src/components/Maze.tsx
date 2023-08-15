@@ -7,11 +7,14 @@ Source: https://sketchfab.com/3d-models/maze-b1b79eaa6aaf47ad84b7645f1b9c36dd
 Title: Maze
 */
 
-import React, { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { Mesh } from 'three'
+import normal from '../../public/textures/wall-normal.jpg'
 
-const Maze =(props:any)=> {
+
+
+const Maze =()=> {
   const { nodes, materials, scene }:any = useGLTF('/maze.glb')
   
 
@@ -20,7 +23,6 @@ const Maze =(props:any)=> {
     scene.rotation.set(-0, 0, 0)
     console.log(materials.palette )
     materials.palette.roughness = (0)
-    materials.palette.flatShading = (0)
     materials.palette.envMapIntensity = (0.5)
     materials.palette.metalness = (0.5)
     materials.palette.side = (0)
@@ -31,7 +33,9 @@ const Maze =(props:any)=> {
       }
     });
   }, [scene, materials, nodes]);
+ 
 
+  console.log(materials.palette)
 
   return (<primitive object={scene} />)
 }

@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { PointerLockControls, Box, Capsule } from "@react-three/drei";
+import { PointerLockControls, Capsule } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 import usePlayerControls from "./components/controls";
 import * as THREE from "three";
@@ -33,14 +33,11 @@ const Controls = () => {
       playerRef.current.lockRotations(true, true); //Locks rotation because of capsule body
       const position = playerRef.current.translation();
       // Setting camera position and creating walking/breathing affect
-      camera.position.x = position.x;
+      camera.position.x = position.x
       if (right || left || forward || backward) {
         camera.position.y = position.y + Math.sin(time * 15) * 0.05 + 1;
       } else
-        camera.position.y =
-          position.y +
-          Math.sin(time * 5 + camera.position.x + camera.position.z) * 0.05 +
-          1;
+        camera.position.y = (position.y + Math.sin(time * 5 + camera.position.x + camera.position.z) * 0.05 + 1);
       camera.position.z = position.z;
 
       //Player movement base on camera direction/rotation
@@ -115,8 +112,6 @@ const Controls = () => {
     }
   }
 
-  console.log(newRef.current)
-
   return (
     <>
       <spotLight ref={lightRef1} name="spotlight 1" />
@@ -125,7 +120,7 @@ const Controls = () => {
       <PointerLockControls />
 
       <RigidBody
-        position={[40.5, 6, 0.21]}
+        position={[46.5, 6, 0.21]}
         type="dynamic"
         ref={playerRef}
         colliders={"ball"}
