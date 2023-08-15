@@ -11,6 +11,7 @@ const Controls = () => {
   const lightRef1 = useRef<any>();
   const lightRef2 = useRef<any>();
   const lightRef3 = useRef<any>();
+  const newRef = useRef<any>();
   const direction = new THREE.Vector3();
   const frontVector = new THREE.Vector3();
   const sideVector = new THREE.Vector3();
@@ -82,7 +83,7 @@ const Controls = () => {
     }
     if (lightRef1.current && flashRef.current) {
       //Light 1
-      lightRef1.current.intensity = 20;
+      lightRef1.current.intensity = 10;
       lightRef1.current.angle = 1;
       lightRef1.current.distance = 10;
       lightRef1.current.decay = 2;
@@ -92,31 +93,33 @@ const Controls = () => {
       lightRef1.current.target.position.z = -15;
       lightRef1.current.target.position.y = -4;
       //Light 2
-      lightRef2.current.intensity = 80;
-      lightRef2.current.angle = 0.45 + Math.sin(time * 950) * 0.00089;
+      lightRef2.current.intensity = 40;
+      lightRef2.current.angle = 0.4 + Math.sin(time * 950) * 0.00089;
       lightRef2.current.distance = 50;
       lightRef2.current.decay = 2;
       lightRef2.current.penumbra = 0.1;
       flashRef.current.add(lightRef2.current);
       flashRef.current.add(lightRef2.current.target);
       lightRef2.current.target.position.z = -8;
-      lightRef2.current.target.position.y = -1.25;
+      lightRef2.current.target.position.y = -1;
       //Light 3
-      lightRef3.current.intensity = 1000;
-      lightRef3.current.angle = 0.35;
+      lightRef3.current.intensity = 100;
+      lightRef3.current.angle = 0.3;
       lightRef3.current.distance = 70;
-      lightRef3.current.decay = 2;
+      lightRef3.current.decay = 1;
       lightRef3.current.penumbra = 0.5;
       flashRef.current.add(lightRef3.current);
       flashRef.current.add(lightRef3.current.target);
       lightRef3.current.target.position.z = -8;
-      lightRef3.current.target.position.y = -1.25;
+      lightRef3.current.target.position.y = -1.;
     }
   }
 
+  console.log(newRef.current)
+
   return (
     <>
-      <spotLight castShadow ref={lightRef1} name="spotlight 1" />
+      <spotLight ref={lightRef1} name="spotlight 1" />
       <spotLight castShadow  ref={lightRef2} name="spotlight 2" />
       <spotLight  castShadow ref={lightRef3} name="spotlight 3" />
       <PointerLockControls />
@@ -129,7 +132,7 @@ const Controls = () => {
         args={[2, 2, 2]}
       >
         <Capsule castShadow receiveShadow args={[0.68, 0.6, 0.6]}>
-          <meshStandardMaterial />
+          <meshStandardMaterial ref={newRef}/>
         </Capsule>
       </RigidBody>
 

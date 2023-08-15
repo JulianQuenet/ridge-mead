@@ -15,6 +15,10 @@ const Scene = () => {
           <meshStandardMaterial color="white" />
         </Box>
       </RigidBody>
+      
+      <Box position={[-5,25,5]} name="moon">
+      <meshStandardMaterial color="white" />
+      </Box>
 
       <RigidBody type="fixed" position={[5,1,0]} colliders={"trimesh"}> 
         <Maze />
