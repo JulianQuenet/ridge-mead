@@ -35,11 +35,10 @@ const Scene = () => {
         </Box>
       </RigidBody>
       
-      <RigidBody position={[-5,25,5]}>
-      <Box castShadow receiveShadow  name="moon">
+    
+      <Box name="moon">
       <meshStandardMaterial color="white" normalMap={normal} roughnessMap={rough}/>
       </Box>
-      </RigidBody>
       
 
       <RigidBody type="fixed" position={[5,1,0]} colliders={"trimesh"}> 

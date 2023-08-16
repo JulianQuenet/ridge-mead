@@ -51,8 +51,6 @@ const Maze =()=> {
   }, [scene, materials, nodes]);
  
 
-  console.log(materials.palette)
-
   return (<primitive object={scene} />)
 }
 

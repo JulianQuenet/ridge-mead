@@ -11,7 +11,7 @@ const Controls = () => {
   const lightRef1 = useRef<any>();
   const lightRef2 = useRef<any>();
   const lightRef3 = useRef<any>();
-  const newRef = useRef<any>();
+  const lightRef4 = useRef<any>();
   const direction = new THREE.Vector3();
   const frontVector = new THREE.Vector3();
   const sideVector = new THREE.Vector3();
@@ -39,7 +39,7 @@ const Controls = () => {
       } else
         camera.position.y =
           position.y +
-          Math.sin(time * 5 + camera.position.x + camera.position.z) * 0.05 +
+          Math.sin(time * 5) * 0.05 +
           1;
       camera.position.z = position.z;
 
@@ -58,11 +58,10 @@ const Controls = () => {
       );
 
       playerRef.current.setAdditionalMass(0.5);
-      if (right) {
-        console.log(playerRef.current.translation());
-      }
+      
     }
     setFlash();
+    
   });
 
   function setFlash() {
@@ -81,7 +80,7 @@ const Controls = () => {
       flashRef.current.translateZ(-0.45);
       flashRef.current.translateX(0.2);
     }
-    if (lightRef1.current && flashRef.current) {
+    if (lightRef4.current && flashRef.current) {
       //Light 1
       lightRef1.current.intensity = 10;
       lightRef1.current.angle = 1;
@@ -90,8 +89,9 @@ const Controls = () => {
       lightRef1.current.penumbra = 0.8;
       flashRef.current.add(lightRef1.current);
       flashRef.current.add(lightRef1.current.target);
-      lightRef1.current.target.position.z = -15;
-      lightRef1.current.target.position.y = -4;
+      lightRef1.current.target.position.z = -12;
+      lightRef1.current.target.position.y = -5.5;
+      lightRef1.current.shadow.bias = 0.0001;
       //Light 2
       lightRef2.current.intensity = 40;
       lightRef2.current.angle = 0.4 + Math.sin(time * 950) * 0.00089;
@@ -101,7 +101,7 @@ const Controls = () => {
       flashRef.current.add(lightRef2.current);
       flashRef.current.add(lightRef2.current.target);
       lightRef2.current.target.position.z = -8;
-      lightRef2.current.target.position.y = -1;
+      lightRef2.current.shadow.bias = 0.0001;
       //Light 3
       lightRef3.current.intensity = 100;
       lightRef3.current.angle = 0.3;
@@ -111,15 +111,21 @@ const Controls = () => {
       flashRef.current.add(lightRef3.current);
       flashRef.current.add(lightRef3.current.target);
       lightRef3.current.target.position.z = -8;
-      lightRef3.current.target.position.y = -1;
+      lightRef3.current.shadow.bias = 0.0001;
+      //BackFlash of light 
+      flashRef.current.add(lightRef4.current)
+      flashRef.current.add(lightRef4.current.target)
     }
   }
+  if(lightRef3.current)console.log(lightRef3.current.position)
+  
 
   return (
     <>
-      <spotLight ref={lightRef1} name="spotlight 1" />
-      <spotLight castShadow ref={lightRef2} name="spotlight 2" />
-      <spotLight castShadow ref={lightRef3} name="spotlight 3" />
+      <spotLight position={[0,0,-0.75]} castShadow ref={lightRef1} name="spotlight 1" />
+      <spotLight position={[0,0,-0.75]} castShadow ref={lightRef2} name="spotlight 2" />
+      <spotLight position={[0,0,-0.75]} castShadow ref={lightRef3} name="spotlight 3" />
+      <pointLight position={[0,0,-1]} castShadow ref={lightRef4} name="spotlight 3" />
       <PointerLockControls />
 
       <RigidBody
@@ -129,8 +135,8 @@ const Controls = () => {
         colliders={"ball"}
         args={[2, 2, 2]}
       >
-        <Capsule castShadow receiveShadow args={[0.68, 0.6, 0.6]}>
-          <meshStandardMaterial ref={newRef} />
+        <Capsule castShadow args={[0.68, 0.6, 0.6]}>
+          <meshStandardMaterial />
         </Capsule>
       </RigidBody>
 
