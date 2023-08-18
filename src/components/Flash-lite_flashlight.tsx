@@ -22,7 +22,7 @@ const flashRef = useRef<any>()
     
       <group dispose={null}  ref={flashRef} castShadow>
       <group rotation={[Math.PI / 2, 0, 0]} >
-        <group rotation={[-Math.PI / 2, 0, 0]} scale={0.015}>
+        <group rotation={[-Math.PI / 2, 0, 0]} scale={0.0115}>
           <group rotation={[Math.PI / 2, 0, 0]} scale={100} >
             <mesh geometry={nodes.Cube012_FlashlightBody_0.geometry} material={materials.FlashlightBody} />
             <mesh geometry={nodes.Cube012_FlashlightGlass_0.geometry} material={materials.FlashlightGlass} />

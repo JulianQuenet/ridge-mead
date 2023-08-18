@@ -11,7 +11,6 @@ const Controls = () => {
   const lightRef1 = useRef<any>();
   const lightRef2 = useRef<any>();
   const lightRef3 = useRef<any>();
-  const lightRef4 = useRef<any>();
   const direction = new THREE.Vector3();
   const frontVector = new THREE.Vector3();
   const sideVector = new THREE.Vector3();
@@ -35,12 +34,8 @@ const Controls = () => {
       // Setting camera position and creating walking/breathing affect
       camera.position.x = position.x;
       if (right || left || forward || backward) {
-        camera.position.y = position.y + Math.sin(time * 15) * 0.05 + 1;
-      } else
-        camera.position.y =
-          position.y +
-          Math.sin(time * 5) * 0.05 +
-          1;
+        camera.position.y = position.y + Math.sin(time * 15) * 0.025 + 1;
+      } else camera.position.y = position.y + Math.sin(time * 5) * 0.025 + 1;
       camera.position.z = position.z;
 
       //Player movement base on camera direction/rotation
@@ -58,84 +53,89 @@ const Controls = () => {
       );
 
       playerRef.current.setAdditionalMass(0.5);
-      
     }
     setFlash();
-    
   });
 
   function setFlash() {
-    requestAnimationFrame(setFlash);
     const time = Date.now() * 0.0005;
     if (flashRef.current && camera) {
       // Update flashlight's position with offsets relative to camera
       flashRef.current.position.copy(camera.position);
       (flashRef.current.position.y =
-        camera.position.y -
-        0.2 +
+        camera.position.y -0.15 +
         Math.sin(time * 3.5 + camera.position.x + camera.position.z) * 0.01), //Breathing affect
         flashRef.current.updateMatrix();
       //Setting up flashlight rotation
       flashRef.current.rotation.copy(camera.rotation);
-      flashRef.current.translateZ(-0.45);
+      flashRef.current.translateZ(-0.35);
       flashRef.current.translateX(0.2);
     }
-    if (lightRef4.current && flashRef.current) {
+    if (lightRef3.current && flashRef.current) {
       //Light 1
       lightRef1.current.intensity = 10;
-      lightRef1.current.angle = 1;
-      lightRef1.current.distance = 10;
+      lightRef1.current.angle = 0.95;
+      lightRef1.current.distance = 7.5;
       lightRef1.current.decay = 2;
       lightRef1.current.penumbra = 0.8;
       flashRef.current.add(lightRef1.current);
       flashRef.current.add(lightRef1.current.target);
-      lightRef1.current.target.position.z = -12;
-      lightRef1.current.target.position.y = -5.5;
+      lightRef1.current.target.position.z = -5;
       lightRef1.current.shadow.bias = 0.0001;
       //Light 2
-      lightRef2.current.intensity = 40;
-      lightRef2.current.angle = 0.4 + Math.sin(time * 950) * 0.00089;
-      lightRef2.current.distance = 50;
+      lightRef2.current.intensity = 20;
+      lightRef2.current.angle = 0.3 + Math.sin(time * 950) * 0.00089;
+      lightRef2.current.distance = 15;
       lightRef2.current.decay = 2;
       lightRef2.current.penumbra = 0.1;
       flashRef.current.add(lightRef2.current);
       flashRef.current.add(lightRef2.current.target);
-      lightRef2.current.target.position.z = -8;
+      lightRef2.current.target.position.z = -3;
       lightRef2.current.shadow.bias = 0.0001;
       //Light 3
-      lightRef3.current.intensity = 100;
-      lightRef3.current.angle = 0.3;
-      lightRef3.current.distance = 70;
+      lightRef3.current.intensity = 20;
+      lightRef3.current.angle = 0.225;
+      lightRef3.current.distance = 20;
       lightRef3.current.decay = 1;
       lightRef3.current.penumbra = 0.5;
       flashRef.current.add(lightRef3.current);
       flashRef.current.add(lightRef3.current.target);
-      lightRef3.current.target.position.z = -8;
+      lightRef3.current.target.position.z = -3;
       lightRef3.current.shadow.bias = 0.0001;
-      //BackFlash of light 
-      flashRef.current.add(lightRef4.current)
-      flashRef.current.add(lightRef4.current.target)
     }
   }
-  if(lightRef3.current)console.log(lightRef3.current.position)
-  
+
 
   return (
     <>
-      <spotLight position={[0,0,-0.75]} castShadow ref={lightRef1} name="spotlight 1" />
-      <spotLight position={[0,0,-0.75]} castShadow ref={lightRef2} name="spotlight 2" />
-      <spotLight position={[0,0,-0.75]} castShadow ref={lightRef3} name="spotlight 3" />
-      <pointLight position={[0,0,-1]} castShadow ref={lightRef4} name="spotlight 3" />
+      <spotLight
+        position={[0, 0, -0.75]}
+        castShadow
+        ref={lightRef1}
+        name="spotlight 1"
+      />
+      <spotLight
+        position={[0, 0, -0.75]}
+        castShadow
+        ref={lightRef2}
+        name="spotlight 2"
+      />
+      <spotLight
+        position={[0, 0, -0.75]}
+        castShadow
+        ref={lightRef3}
+        name="spotlight 3"
+      />
       <PointerLockControls />
 
       <RigidBody
-        position={[40.5, 6, 0.21]}
+        position={[40.5, 6, -0.51]}
         type="dynamic"
         ref={playerRef}
         colliders={"ball"}
         args={[2, 2, 2]}
       >
-        <Capsule castShadow args={[0.68, 0.6, 0.6]}>
+        <Capsule castShadow args={[0.48, 0.4, 0.4]}>
           <meshStandardMaterial />
         </Capsule>
       </RigidBody>

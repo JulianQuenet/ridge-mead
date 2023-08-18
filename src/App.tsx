@@ -12,14 +12,14 @@ function App() {
       shadows
       camera={{ fov: 50, position:[5,3,2] }}
     >
-      {/* <ambientLight/> */}
+      {/* <ambientLight intensity={1}/> */}
       <directionalLight
         position={[-5, 25, 5]}
-        intensity={0.2}
+        
         castShadow
         shadow-mapSize={5024}
       />
-      <color attach="background" args={["black"]} />
+      <color attach="background" args={["lightblue"]} />
       <Physics>
         <Controls />
         <Scene/>
