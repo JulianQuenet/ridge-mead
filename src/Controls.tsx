@@ -86,7 +86,7 @@ const Controls = () => {
       lightRef1.current.shadow.bias = 0.0001;
       //Light 2
       lightRef2.current.intensity = 40;
-      lightRef2.current.angle = 0.35 + Math.sin(time * 950) * 0.00089;
+      lightRef2.current.angle = 0.35 + Math.sin(time * 950) * 0.0012;
       lightRef2.current.distance = 35;
       lightRef2.current.decay = 2;
       lightRef2.current.penumbra = 0.1;
