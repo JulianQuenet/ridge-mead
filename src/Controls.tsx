@@ -11,6 +11,7 @@ const Controls = () => {
   const lightRef1 = useRef<any>();
   const lightRef2 = useRef<any>();
   const lightRef3 = useRef<any>();
+  const lightRef4 = useRef<any>();
   const direction = new THREE.Vector3();
   const frontVector = new THREE.Vector3();
   const sideVector = new THREE.Vector3();
@@ -63,7 +64,8 @@ const Controls = () => {
       // Update flashlight's position with offsets relative to camera
       flashRef.current.position.copy(camera.position);
       (flashRef.current.position.y =
-        camera.position.y -0.15 +
+        camera.position.y -
+        0.15 +
         Math.sin(time * 3.5 + camera.position.x + camera.position.z) * 0.01), //Breathing affect
         flashRef.current.updateMatrix();
       //Setting up flashlight rotation
@@ -71,11 +73,11 @@ const Controls = () => {
       flashRef.current.translateZ(-0.35);
       flashRef.current.translateX(0.2);
     }
-    if (lightRef3.current && flashRef.current) {
+    if (lightRef4.current && flashRef.current) {
       //Light 1
-      lightRef1.current.intensity = 10;
+      lightRef1.current.intensity = 20;
       lightRef1.current.angle = 0.95;
-      lightRef1.current.distance = 7.5;
+      lightRef1.current.distance = 7;
       lightRef1.current.decay = 2;
       lightRef1.current.penumbra = 0.8;
       flashRef.current.add(lightRef1.current);
@@ -83,9 +85,9 @@ const Controls = () => {
       lightRef1.current.target.position.z = -5;
       lightRef1.current.shadow.bias = 0.0001;
       //Light 2
-      lightRef2.current.intensity = 20;
-      lightRef2.current.angle = 0.3 + Math.sin(time * 950) * 0.00089;
-      lightRef2.current.distance = 15;
+      lightRef2.current.intensity = 40;
+      lightRef2.current.angle = 0.35 + Math.sin(time * 950) * 0.00089;
+      lightRef2.current.distance = 35;
       lightRef2.current.decay = 2;
       lightRef2.current.penumbra = 0.1;
       flashRef.current.add(lightRef2.current);
@@ -93,18 +95,19 @@ const Controls = () => {
       lightRef2.current.target.position.z = -3;
       lightRef2.current.shadow.bias = 0.0001;
       //Light 3
-      lightRef3.current.intensity = 20;
-      lightRef3.current.angle = 0.225;
-      lightRef3.current.distance = 20;
+      lightRef3.current.intensity = 40;
+      lightRef3.current.angle = 0.285;
+      lightRef3.current.distance = 35;
       lightRef3.current.decay = 1;
       lightRef3.current.penumbra = 0.5;
       flashRef.current.add(lightRef3.current);
       flashRef.current.add(lightRef3.current.target);
       lightRef3.current.target.position.z = -3;
       lightRef3.current.shadow.bias = 0.0001;
+      //Back Flash
+      flashRef.current.add(lightRef4.current);
     }
   }
-
 
   return (
     <>
@@ -126,10 +129,11 @@ const Controls = () => {
         ref={lightRef3}
         name="spotlight 3"
       />
+      <pointLight position={[0, 0, -0.75]} ref={lightRef4} name="back flash" />
       <PointerLockControls />
 
       <RigidBody
-        position={[40.5, 6, -0.51]}
+        position={[36.5, 6, -0.51]}
         type="dynamic"
         ref={playerRef}
         colliders={"ball"}

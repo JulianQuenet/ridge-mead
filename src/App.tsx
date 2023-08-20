@@ -8,18 +8,17 @@ import { Stars } from "@react-three/drei";
 function App() {
   return (
     <Canvas
-      frameloop="demand"
       shadows
       camera={{ fov: 50, position:[5,3,2] }}
     >
       {/* <ambientLight intensity={1}/> */}
       <directionalLight
         position={[-5, 25, 5]}
-        
+        intensity={0.12}
         castShadow
         shadow-mapSize={5024}
       />
-      <color attach="background" args={["lightblue"]} />
+      <color attach="background" args={["black"]} />
       <Physics>
         <Controls />
         <Scene/>

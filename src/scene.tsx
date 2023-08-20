@@ -6,7 +6,7 @@ import { RigidBody } from "@react-three/rapier";
 import { useLoader } from "@react-three/fiber";
 import { RepeatWrapping, TextureLoader } from "three";
 import { useEffect } from "react";
-import { Model } from "./components/HouseRef";
+import { Model } from "./components/BackRooms";
 
 const Scene = () => {
 
@@ -18,11 +18,12 @@ const Scene = () => {
           <meshStandardMaterial color="white" />
         </Box>
       </RigidBody>
-
-      <mesh  position={[5,1,0]} > 
-        <Model />
-      </mesh>
       
+
+      <RigidBody  position={[5,0.65,0]}  colliders="trimesh">
+        <Model />
+      </RigidBody>
+        
     </>
   );
 };
