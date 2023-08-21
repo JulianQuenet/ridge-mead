@@ -3,9 +3,6 @@ import {
 } from "@react-three/drei";
 
 import { RigidBody } from "@react-three/rapier";
-import { useLoader } from "@react-three/fiber";
-import { RepeatWrapping, TextureLoader } from "three";
-import { useEffect } from "react";
 import { Model } from "./components/BackRooms";
 
 const Scene = () => {
@@ -19,8 +16,8 @@ const Scene = () => {
         </Box>
       </RigidBody>
       
-
-      <RigidBody  position={[5,0.65,0]}  colliders="trimesh">
+  
+      <RigidBody position={[5,0.65,0]} colliders="trimesh">
         <Model />
       </RigidBody>
         

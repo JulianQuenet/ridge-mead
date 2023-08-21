@@ -56,6 +56,9 @@ const Controls = () => {
       playerRef.current.setAdditionalMass(0.5);
     }
     setFlash();
+    if(right){
+      console.log(playerRef.current.translation())
+    }
   });
 
   function setFlash() {
@@ -133,7 +136,8 @@ const Controls = () => {
       <PointerLockControls />
 
       <RigidBody
-        position={[36.5, 6, -0.51]}
+        position={[1.75, 1.65, 41.19]}
+        lockTranslations
         type="dynamic"
         ref={playerRef}
         colliders={"ball"}
