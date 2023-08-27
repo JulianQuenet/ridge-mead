@@ -56,9 +56,9 @@ const Controls = () => {
       playerRef.current.setAdditionalMass(0.5);
     }
     setFlash();
-    if(right){
-      console.log(playerRef.current.translation())
-    }
+    // if(right){
+    //   console.log(playerRef.current.translation())
+    // }
   });
 
   function setFlash() {
