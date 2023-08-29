@@ -27,7 +27,7 @@ export function Model(props: any) {
       }
       setInterval(() => {
         setUse(true);
-      });
+      }, 15000);
     }
   }, [materials, nodes, scene]);
 
@@ -55,7 +55,7 @@ export function Model(props: any) {
           castShadow
           receiveShadow
           geometry={nodes.Object_48.geometry}
-          material={materials.Wall}
+          material={use? materials.Wall : materials.Columns}
           position={[0, -0.03, 0]}
         />
       </group>
