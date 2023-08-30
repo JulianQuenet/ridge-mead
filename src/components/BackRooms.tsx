@@ -4,195 +4,86 @@ Command: npx gltfjsx@6.2.10 backRooms.glb
 */
 
 import { useGLTF } from "@react-three/drei";
-import { useEffect, useState } from "react";
-import { Mesh, MeshStandardMaterial } from "three";
+import { useEffect} from "react";
+import { MeshStandardMaterial } from "three";
 
 export function Model(props: any) {
   const { scene, nodes, materials }: any = useGLTF("/backRooms.glb");
-  const [use, setUse] = useState<Boolean>(false);
 
   if (materials.Wall && materials.Columns) {
     materials.Wall.side = 0;
     materials.Wall.roughness = 0.35;
+    materials.top.roughness = 0.35;
     materials.Columns.roughness = 0.45;
-    materials.paper_bake.roughness = 0.1;
   }
 
   useEffect(() => {
     for (const [keys, values] of Object.entries<MeshStandardMaterial>(
       materials
     )) {
-      if (keys !== "paper_bake") {
+      if (keys !== "top" && keys !== "floor") {
         values.side = 0;
       }
-      setInterval(() => {
-        setUse(true);
-      }, 15000);
+      
     }
   }, [materials, nodes, scene]);
 
   return (
     <group {...props} dispose={null}>
-      <group
-        position={[-6.011, 0.219, 40.157]}
-        rotation={[Math.PI, -1.563, Math.PI]}
-        scale={[2.319, 1.849, 2.073]}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_12.geometry}
-          material={materials.SkirtNew}
-          position={[0, -0.09, 0]}
-        />
-      </group>
-      <group
-        position={[-5.165, 1.145, 42.135]}
-        rotation={[-Math.PI, 0.008, -Math.PI]}
-        scale={[2.073, 1.849, 2.319]}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_48.geometry}
-          material={use? materials.Wall : materials.Columns}
-          position={[0, -0.03, 0]}
-        />
-      </group>
-      <group
-        position={[0.473, 0.016, 55.112]}
-        rotation={[-Math.PI / 2, 0, -0.006]}
-        scale={[0.005, 0.004, 0.005]}
-      >
-        <group position={[0, 0.002, 0]} rotation={[Math.PI / 2, 0, 0]}>
-          <group
-            position={[-1000, 0, -0.001]}
-            rotation={[-Math.PI / 2, 0, 0]}
-            scale={100}
-          >
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.defaultMaterial002.geometry}
-              material={materials.cl_body_mat}
-              rotation={[0, 0, -0.149]}
-            />
-          </group>
-          <group
-            position={[100, 0, -0.001]}
-            rotation={[-Math.PI / 2, 0, 0]}
-            scale={100}
-          >
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.defaultMaterial001.geometry}
-              material={materials.cl_body_mat}
-              rotation={[0, 0, -0.138]}
-            />
-          </group>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.defaultMaterial003.geometry}
-            material={materials.cl_body_mat}
-            position={[-460, 66.507, -0.001]}
-            rotation={[-Math.PI / 2, 0, 0]}
-            scale={100}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.defaultMaterial.geometry}
-            material={materials.cl_body_mat}
-            position={[600, 0, -0.001]}
-            rotation={[-Math.PI / 2, 0, 0]}
-            scale={100}
-          />
+      <group name="Scene">
+        <group name="SkirtingBoards_5" position={[-6.011, 0.219, 40.157]} rotation={[Math.PI, -1.563, Math.PI]} scale={[2.319, 1.849, 2.073]}>
+          <mesh castShadow receiveShadow name="Object_12" geometry={nodes.Object_12.geometry} material={materials.SkirtNew} position={[0, -0.09, 0]} />
         </group>
-      </group>
-      <group
-        position={[-24.039, 0.089, 8.697]}
-        rotation={[3.137, -0.595, -1.648]}
-        scale={[0.015, 0.006, 0.013]}
-      >
-        <group rotation={[Math.PI / 2, 0, 0]}>
-          <mesh
-            geometry={nodes.crowbar_crowbar_0.geometry}
-            material={materials.crowbar}
-            scale={100}
-          />
+        <group name="Column004_6" position={[-5.669, 1.976, 42.462]} rotation={[Math.PI, -1.563, Math.PI]} scale={[2.319, 1.849, 2.073]}>
+          <mesh castShadow receiveShadow name="Object_14" geometry={nodes.Object_14.geometry} material={materials.Wall} position={[0, -0.04, 0]} />
         </group>
+        <group name="Walls_23" position={[-5.165, 1.145, 42.135]} rotation={[-Math.PI, 0.008, -Math.PI]} scale={[2.073, 1.849, 2.319]}>
+          <mesh castShadow receiveShadow name="Object_48" geometry={nodes.Object_48.geometry} material={materials.Wall} position={[0, -0.03, 0]} />
+        </group>
+        <group name="Sketchfab_model002" position={[0.428, -0.01, 55.038]} rotation={[-Math.PI / 2, 0, -0.006]} scale={[0.005, 0.004, 0.005]}>
+          <group name="Collada_visual_scene_group" position={[0, 0.003, 0]} rotation={[Math.PI / 2, 0, 0]}>
+            <group name="cl_body_01" position={[-1000, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={100}>
+              <mesh castShadow receiveShadow name="defaultMaterial002" geometry={nodes.defaultMaterial002.geometry} material={materials.cl_body_mat} rotation={[0, 0, -0.149]} />
+            </group>
+            <group name="cl_body_02" position={[100, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={100}>
+              <mesh castShadow receiveShadow  name="defaultMaterial001" geometry={nodes.defaultMaterial001.geometry} material={materials.cl_body_mat} rotation={[0, 0, -0.138]} />
+            </group>
+            <group name="cl_body_03" position={[-460, 66.507, -0.001]} rotation={[-Math.PI / 2, 0, 0]} scale={100}>
+              <mesh castShadow receiveShadow  name="defaultMaterial003" geometry={nodes.defaultMaterial003.geometry} material={materials.cl_body_mat} />
+            </group>
+            <group name="cl_body_04" position={[600, 0, -0.001]} rotation={[-Math.PI / 2, 0, 0]} scale={100}>
+              <mesh castShadow receiveShadow name="defaultMaterial" geometry={nodes.defaultMaterial.geometry} material={materials.cl_body_mat} />
+            </group>
+          </group>
+        </group>
+        <group name="Sketchfab_model005" position={[-15.203, 0, 56.378]} rotation={[-Math.PI / 2, 0, 0]} scale={[0.342, 0.164, 0.153]}>
+          <group name="Collada_visual_scene_group001" rotation={[Math.PI / 2, 0, 0]} />
+        </group>
+        <group name="Sketchfab_model" position={[8.102, -0.057, 25.56]} rotation={[-Math.PI / 2, 0, -1.573]} scale={[0.051, 0.038, 0.03]}>
+          <group name="88b38f8db19d44e98a0a6580aa47f0f9fbx" rotation={[Math.PI / 2, 0, 0]}>
+            <group name="Object_2">
+              <group name="RootNode">
+                <group name="door" position={[-20.073, 62.415, 29.065]} rotation={[-Math.PI / 2, 0, 0]} scale={0.073}>
+                  <group name="Object_7" position={[53.162, 405.59, 82.842]}>
+                    <mesh name="door_Door_0" geometry={nodes.door_Door_0.geometry} material={materials.Door} position={[0.001, 0, 0]} />
+                    <mesh name="door_Hand_0" geometry={nodes.door_Hand_0.geometry} material={materials.Hand} position={[0.001, 0, 0]} />
+                    <mesh name="door_Lock_0" geometry={nodes.door_Lock_0.geometry} material={materials.Lock} position={[0.001, 0, 0]} />
+                    <mesh name="door_Lock_2_0" geometry={nodes.door_Lock_2_0.geometry} material={materials.Lock_2} position={[0.001, 0, 0]} />
+                  </group>
+                </group>
+                <group name="rama" position={[-16.172, 68.493, -0.695]} rotation={[-Math.PI / 2, 0, 0]} scale={0.073}>
+                  <mesh name="rama_Door_0" geometry={nodes.rama_Door_0.geometry} material={materials.Door} position={[0.001, 0, 0]} />
+                </group>
+              </group>
+            </group>
+          </group>
+        </group>
+        <mesh  receiveShadow name="Plane" geometry={nodes.Plane.geometry} material={materials.top} position={[-5.015, 3.743, 45.046]} scale={[20.123, 2.012, 20.123]} />
+        <mesh  receiveShadow name="Plane001" geometry={nodes.Plane001.geometry} material={materials.top} position={[-7.963, 0, 55.286]} scale={[22.5, 1, 13.174]} />
+        <mesh  receiveShadow name="Plane002" geometry={nodes.Plane002.geometry} material={materials.top} position={[-7.963, 0, 28.94]} scale={[22.5, 1, 13.174]} />
       </group>
-      <group
-        position={[20.07, 0, 6.762]}
-        rotation={[-Math.PI / 2, 0, 1.554]}
-        scale={[1.025, 1.278, 1.037]}
-      >
-        <mesh
-          geometry={nodes.Cube_0.geometry}
-          material={materials.walls_bake}
-          position={[0, 0, 1.029]}
-        />
-        <mesh
-          geometry={nodes.Cube001_0.geometry}
-          material={materials.dresser_bake}
-          position={[0.452, 2.386, 1.097]}
-        />
-        <mesh
-          geometry={nodes.Cube002_cell008_0.geometry}
-          material={materials.mirror}
-          position={[0.208, 2.939, 2.309]}
-        />
-        <mesh
-          geometry={nodes.Cube003_0.geometry}
-          material={materials.paper_bake}
-          position={[-8.131, -1.181, 0.288]}
-        />
-        <mesh
-          geometry={nodes.Cylinder002_0.geometry}
-          material={materials.cans_bake}
-          position={[-1.196, -1.796, 0.094]}
-          rotation={[-1.49, -1.388, -3.062]}
-        />
-      </group>
-      {use && (
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube002.geometry}
-          material={materials.Columns}
-          position={[8.231, 1.763, 22.968]}
-          rotation={[-Math.PI / 2, 0, Math.PI]}
-          scale={[1.197, 4.638, 1.37]}
-        />
-      )}
-      <mesh
-        receiveShadow
-        geometry={nodes.Plane.geometry}
-        material={materials.Floor}
-        position={[-5.083, 0, 42.914]}
-        scale={[20.123, 2.012, 20.123]}
-      />
-      <mesh
-        geometry={nodes.Plane001.geometry}
-        material={materials.paper_bake}
-        position={[-6.466, 3.684, 43.045]}
-        scale={[19.762, 2.012, 20.922]}
-      />
-      {use && (
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_14.geometry}
-          material={materials.Columns}
-          position={[-5.669, 1.976, 42.462]}
-          rotation={[Math.PI, -1.563, Math.PI]}
-          scale={[2.319, 1.849, 2.073]}
-        />
-      )}
     </group>
-  );
+  )
 }
 
 useGLTF.preload("/backRooms.glb");

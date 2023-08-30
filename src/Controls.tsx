@@ -35,7 +35,7 @@ const Controls = () => {
       // Setting camera position and creating walking/breathing affect
       camera.position.x = position.x;
       if (right || left || forward || backward) {
-        camera.position.y = position.y + Math.sin(time * 15) * 0.025 + 1;
+        camera.position.y = position.y + Math.sin(time * 15) * 0.065 + 1;
       } else camera.position.y = position.y + Math.sin(time * 5) * 0.025 + 1;
       camera.position.z = position.z;
 
@@ -136,7 +136,7 @@ const Controls = () => {
       <PointerLockControls />
 
       <RigidBody
-        position={[1.75, 1.65, 41.19]}
+        position={[1.75, 1.85, 41.19]}
         lockTranslations
         type="dynamic"
         ref={playerRef}
