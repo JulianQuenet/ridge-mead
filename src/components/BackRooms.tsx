@@ -9,11 +9,11 @@ import { MeshStandardMaterial } from "three";
 
 export function Model(props: any) {
   const { scene, nodes, materials }: any = useGLTF("/backRooms.glb");
-
+ 
   if (materials.Wall && materials.Columns) {
     materials.Wall.side = 0;
     materials.Wall.roughness = 0.35;
-    materials.top.roughness = 0.35;
+    materials.top.roughness = 0.15;
     materials.Columns.roughness = 0.45;
   }
 
@@ -26,8 +26,12 @@ export function Model(props: any) {
       }
       
     }
-  }, [materials, nodes, scene]);
 
+  }, [materials, nodes, scene]);
+ 
+
+ 
+  
   return (
     <group {...props} dispose={null}>
       <group name="Scene">
@@ -49,7 +53,7 @@ export function Model(props: any) {
               <mesh castShadow receiveShadow  name="defaultMaterial001" geometry={nodes.defaultMaterial001.geometry} material={materials.cl_body_mat} rotation={[0, 0, -0.138]} />
             </group>
             <group name="cl_body_03" position={[-460, 66.507, -0.001]} rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-              <mesh castShadow receiveShadow  name="defaultMaterial003" geometry={nodes.defaultMaterial003.geometry} material={materials.cl_body_mat} />
+              <mesh castShadow receiveShadow name="defaultMaterial003" geometry={nodes.defaultMaterial003.geometry} material={materials.cl_body_mat} />
             </group>
             <group name="cl_body_04" position={[600, 0, -0.001]} rotation={[-Math.PI / 2, 0, 0]} scale={100}>
               <mesh castShadow receiveShadow name="defaultMaterial" geometry={nodes.defaultMaterial.geometry} material={materials.cl_body_mat} />
@@ -65,22 +69,21 @@ export function Model(props: any) {
               <group name="RootNode">
                 <group name="door" position={[-20.073, 62.415, 29.065]} rotation={[-Math.PI / 2, 0, 0]} scale={0.073}>
                   <group name="Object_7" position={[53.162, 405.59, 82.842]}>
-                    <mesh name="door_Door_0" geometry={nodes.door_Door_0.geometry} material={materials.Door} position={[0.001, 0, 0]} />
-                    <mesh name="door_Hand_0" geometry={nodes.door_Hand_0.geometry} material={materials.Hand} position={[0.001, 0, 0]} />
-                    <mesh name="door_Lock_0" geometry={nodes.door_Lock_0.geometry} material={materials.Lock} position={[0.001, 0, 0]} />
-                    <mesh name="door_Lock_2_0" geometry={nodes.door_Lock_2_0.geometry} material={materials.Lock_2} position={[0.001, 0, 0]} />
+                    <mesh castShadow receiveShadow name="door_Door_0" geometry={nodes.door_Door_0.geometry} material={materials.Door} position={[0.001, 0, 0]} />
+                    <mesh castShadow receiveShadow  name="door_Hand_0" geometry={nodes.door_Hand_0.geometry} material={materials.Hand} position={[0.001, 0, 0]} />
+                    <mesh castShadow receiveShadow name="door_Lock_0" geometry={nodes.door_Lock_0.geometry} material={materials.Lock} position={[0.001, 0, 0]} />
+                    <mesh castShadow receiveShadow name="door_Lock_2_0" geometry={nodes.door_Lock_2_0.geometry} material={materials.Lock_2} position={[0.001, 0, 0]} />
                   </group>
                 </group>
                 <group name="rama" position={[-16.172, 68.493, -0.695]} rotation={[-Math.PI / 2, 0, 0]} scale={0.073}>
-                  <mesh name="rama_Door_0" geometry={nodes.rama_Door_0.geometry} material={materials.Door} position={[0.001, 0, 0]} />
+                  <mesh castShadow receiveShadow name="rama_Door_0" geometry={nodes.rama_Door_0.geometry} material={materials.Door} position={[0.001, 0, 0]} />
                 </group>
               </group>
             </group>
           </group>
         </group>
-        <mesh  receiveShadow name="Plane" geometry={nodes.Plane.geometry} material={materials.top} position={[-5.015, 3.743, 45.046]} scale={[20.123, 2.012, 20.123]} />
-        <mesh  receiveShadow name="Plane001" geometry={nodes.Plane001.geometry} material={materials.top} position={[-7.963, 0, 55.286]} scale={[22.5, 1, 13.174]} />
-        <mesh  receiveShadow name="Plane002" geometry={nodes.Plane002.geometry} material={materials.top} position={[-7.963, 0, 28.94]} scale={[22.5, 1, 13.174]} />
+        <mesh  receiveShadow name="Plane" geometry={nodes.Plane.geometry} material={materials.top} position={[-5.682, 3.743, 45.325]} scale={[20.123, 2.012, 20.123]} />
+        <mesh  receiveShadow name="Plane002" geometry={nodes.Plane002.geometry} material={materials.top} position={[-7.963, 0, 43.016]} scale={[22.5, 1, 22.5]} />
       </group>
     </group>
   )

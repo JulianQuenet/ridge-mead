@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { PointerLockControls, Capsule } from "@react-three/drei";
+import { PointerLockControls, Capsule} from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 import usePlayerControls from "./components/controls";
 import * as THREE from "three";
@@ -35,8 +35,8 @@ const Controls = () => {
       // Setting camera position and creating walking/breathing affect
       camera.position.x = position.x;
       if (right || left || forward || backward) {
-        camera.position.y = position.y + Math.sin(time * 15) * 0.065 + 1;
-      } else camera.position.y = position.y + Math.sin(time * 5) * 0.025 + 1;
+        camera.position.y = position.y + Math.sin(time * 15) * 0.065 + 1.25;
+      } else camera.position.y = position.y + Math.sin(time * 5) * 0.025 + 1.25;
       camera.position.z = position.z;
 
       //Player movement base on camera direction/rotation
@@ -55,10 +55,11 @@ const Controls = () => {
 
       playerRef.current.setAdditionalMass(0.5);
     }
+    
     setFlash();
-    // if(right){
-    //   console.log(playerRef.current.translation())
-    // }
+    if(right){
+      console.log(lightRef3.current)
+    }
   });
 
   function setFlash() {
@@ -116,13 +117,11 @@ const Controls = () => {
     <>
       <spotLight
         position={[0, 0, -0.75]}
-        castShadow
         ref={lightRef1}
         name="spotlight 1"
       />
       <spotLight
         position={[0, 0, -0.75]}
-        castShadow
         ref={lightRef2}
         name="spotlight 2"
       />
@@ -137,8 +136,6 @@ const Controls = () => {
 
       <RigidBody
         position={[1.75, 1.85, 41.19]}
-        lockTranslations
-        type="dynamic"
         ref={playerRef}
         colliders={"ball"}
         args={[2, 2, 2]}
@@ -151,6 +148,11 @@ const Controls = () => {
       <mesh position={[5, 3, -5]} ref={flashRef}>
         <Flashlight />
       </mesh>
+
+      
+      {/* <Box ref={testRef} position={[1.75, 1.85, 39.19]} >
+      <meshStandardMaterial />
+      </Box> */}
     </>
   );
 };
