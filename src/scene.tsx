@@ -2,6 +2,7 @@
 import { RigidBody } from "@react-three/rapier";
 import { Model } from "./components/BackRooms";
 import { Nurse } from "./components/Nurse";
+import { NurseHead } from "./components/NurseHead";
 
 const Scene = () => {
 
@@ -15,6 +16,8 @@ const Scene = () => {
       <RigidBody lockTranslations colliders="trimesh"> 
         <Nurse />  
       </RigidBody>
+
+      <NurseHead />
       
     </>
   );

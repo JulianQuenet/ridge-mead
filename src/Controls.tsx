@@ -57,9 +57,9 @@ const Controls = () => {
     }
     
     setFlash();
-    if(right){
-      console.log(lightRef3.current)
-    }
+    // if(right){
+    //   console.log(lightRef3.current)
+    // }
   });
 
   function setFlash() {
