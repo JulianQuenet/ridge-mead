@@ -10,20 +10,22 @@ import { useFrame, useThree } from '@react-three/fiber';
 export function NurseHead() {
   const { nodes, materials }:any = useGLTF('/nurse-head.glb')
 
-  const test = useRef<any>();
+  const nurseHead = useRef<any>();
 
 
   const { camera } = useThree();
   
-  useFrame(()=>{
-    test.current.lookAt(camera.position)
+  useFrame(()=>{//Get the nurse head to look a the camera with each frame
+    nurseHead.current.lookAt(camera.position.x, camera.position.y, camera.position.z)
   })
 
   return (
-    <group position={[14.381, 2.35, 59.0]} dispose={null}>
-      <group  rotation={[-2.18, 0, 0]} scale={0.13}>
-        <mesh geometry={nodes.hat_lp_hat_0004.geometry} material={materials['material.004']} />
-        <mesh ref={test} geometry={nodes.hat_lp_hat_0004_1.geometry} material={materials['body.004']} />
+    <group position={[14.37, 2.65, 58.93]} dispose={null}>
+     <group  scale={0.14}>
+       <mesh castShadow ref={nurseHead}> 
+        <mesh geometry={nodes.hat_lp_hat_0005_2.geometry} material={materials['material.006']} />
+        <mesh geometry={nodes.hat_lp_hat_0005_3.geometry} material={materials['body.007']} />
+        </mesh>
       </group>
     </group>
   )

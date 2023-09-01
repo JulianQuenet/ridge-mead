@@ -10,7 +10,7 @@ export function Nurse() {
   const { nodes, materials }:any = useGLTF('/nurse.glb')
  
   return (
-    <group position={[14.381, 0.2, 59.0]} dispose={null}>
+    <group position={[14.35, 0.2, 58.92]} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, -2.558]} scale={[0.145, 0.128, 0.155]}>
         <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
           <group position={[0, 0, -0.005]}>
