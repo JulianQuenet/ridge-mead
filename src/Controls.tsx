@@ -131,7 +131,7 @@ const Controls = () => {
         ref={lightRef3}
         name="spotlight 3"
       />
-      <pointLight position={[0, 0, -0.75]} ref={lightRef4} name="back flash" />
+      <pointLight intensity={0.125} position={[0, 0, -1]} ref={lightRef4} name="back flash" />
       <PointerLockControls />
 
       <RigidBody
