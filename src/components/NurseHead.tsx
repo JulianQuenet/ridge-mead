@@ -22,9 +22,9 @@ export function NurseHead() {
   return (
     <group position={[14.37, 2.65, 58.93]} dispose={null}>
      <group  scale={0.14}>
-       <mesh castShadow ref={nurseHead}> 
-        <mesh geometry={nodes.hat_lp_hat_0005_2.geometry} material={materials['material.006']} />
-        <mesh geometry={nodes.hat_lp_hat_0005_3.geometry} material={materials['body.007']} />
+       <mesh  ref={nurseHead}> 
+        <mesh  castShadow geometry={nodes.hat_lp_hat_0005_2.geometry} material={materials['material.006']} />
+        <mesh castShadow geometry={nodes.hat_lp_hat_0005_3.geometry} material={materials['body.007']} />
         </mesh>
       </group>
     </group>
