@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { PointerLockControls, Capsule} from "@react-three/drei";
+import { PointerLockControls, Capsule } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 import usePlayerControls from "./components/controls";
 import * as THREE from "three";
@@ -55,7 +55,7 @@ const Controls = () => {
 
       playerRef.current.setAdditionalMass(0.5);
     }
-    
+
     setFlash();
     // if(right){
     //   console.log(lightRef3.current)
@@ -79,9 +79,9 @@ const Controls = () => {
     }
     if (lightRef4.current && flashRef.current) {
       //Light 1
-      lightRef1.current.intensity = 20;
+      lightRef1.current.intensity = 2.5;
       lightRef1.current.angle = 0.95;
-      lightRef1.current.distance = 7;
+      lightRef1.current.distance = 30;
       lightRef1.current.decay = 2;
       lightRef1.current.penumbra = 0.8;
       flashRef.current.add(lightRef1.current);
@@ -91,7 +91,7 @@ const Controls = () => {
       //Light 2
       lightRef2.current.intensity = 40;
       lightRef2.current.angle = 0.35 + Math.sin(time * 950) * 0.0012;
-      lightRef2.current.distance = 35;
+      lightRef2.current.distance = 30;
       lightRef2.current.decay = 2;
       lightRef2.current.penumbra = 0.1;
       flashRef.current.add(lightRef2.current);
@@ -99,10 +99,10 @@ const Controls = () => {
       lightRef2.current.target.position.z = -3;
       lightRef2.current.shadow.bias = 0.0001;
       //Light 3
-      lightRef3.current.intensity = 40;
+      lightRef3.current.intensity = 150;
       lightRef3.current.angle = 0.285;
-      lightRef3.current.distance = 35;
-      lightRef3.current.decay = 1;
+      lightRef3.current.distance = 30;
+      lightRef3.current.decay = 2;
       lightRef3.current.penumbra = 0.5;
       flashRef.current.add(lightRef3.current);
       flashRef.current.add(lightRef3.current.target);
@@ -115,23 +115,20 @@ const Controls = () => {
 
   return (
     <>
-      <spotLight
-        position={[0, 0, -0.75]}
-        ref={lightRef1}
-        name="spotlight 1"
-      />
-      <spotLight
-        position={[0, 0, -0.75]}
-        ref={lightRef2}
-        name="spotlight 2"
-      />
+      <spotLight position={[0, 0, -0.75]} ref={lightRef1} name="spotlight 1" />
+      <spotLight position={[0, 0, -0.75]} ref={lightRef2} name="spotlight 2" />
       <spotLight
         position={[0, 0, -0.75]}
         castShadow
         ref={lightRef3}
         name="spotlight 3"
       />
-      <pointLight intensity={0.125} position={[0, 0, -1]} ref={lightRef4} name="back flash" />
+      <pointLight
+        intensity={0.125}
+        position={[0, 0, -1]}
+        ref={lightRef4}
+        name="back flash"
+      />
       <PointerLockControls />
 
       <RigidBody
@@ -149,7 +146,6 @@ const Controls = () => {
         <Flashlight />
       </mesh>
 
-      
       {/* <Box ref={testRef} position={[1.75, 1.85, 39.19]} >
       <meshStandardMaterial />
       </Box> */}
