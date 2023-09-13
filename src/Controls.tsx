@@ -1,12 +1,19 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { PointerLockControls, Capsule } from "@react-three/drei";
+import {
+  PointerLockControls,
+  Capsule,
+  PositionalAudio,
+} from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
-import usePlayerControls from "./components/controls";
+import usePlayerControls from "./components/inputs";
 import * as THREE from "three";
 import { Flashlight } from "./components/Flash-lite_flashlight";
 
 const Controls = () => {
+  const [canPlay, setCanPlay] = useState<any>(false);
+  const walking = "./sounds/step_cloth1.ogg"
+  const playRef = useRef<any>();
   const flashRef = useRef<any>();
   const lightRef1 = useRef<any>();
   const lightRef2 = useRef<any>();
@@ -19,7 +26,7 @@ const Controls = () => {
   const playerRef = useRef<any>();
 
   const { camera } = useThree();
-
+  
   const { forward, backward, left, right } = usePlayerControls();
   useEffect(() => {
     camera.rotation.y = 0;
@@ -34,11 +41,14 @@ const Controls = () => {
       const position = playerRef.current.translation();
       // Setting camera position and creating walking/breathing affect
       camera.position.x = position.x;
+      camera.position.z = position.z;
       if (right || left || forward || backward) {
         camera.position.y = position.y + Math.sin(time * 15) * 0.065 + 1.25;
-      } else camera.position.y = position.y + Math.sin(time * 5) * 0.025 + 1.25;
-      camera.position.z = position.z;
-
+        setCanPlay(false)
+      } else {
+        camera.position.y = position.y + Math.sin(time * 5) * 0.025 + 1.25;
+        setCanPlay(false)
+      }
       //Player movement base on camera direction/rotation
       frontVector.set(0, 0, Number(backward) - Number(forward));
       sideVector.set(Number(left) - Number(right), 0, 0);
@@ -55,7 +65,8 @@ const Controls = () => {
 
       playerRef.current.setAdditionalMass(0.5);
     }
-
+    const listener = new THREE.AudioListener();
+    camera.add(listener);
     setFlash();
     // if(right){
     //   console.log(lightRef3.current)
@@ -81,7 +92,7 @@ const Controls = () => {
       //Light 1
       lightRef1.current.intensity = 2.5;
       lightRef1.current.angle = 0.95;
-      lightRef1.current.distance = 30;
+      lightRef1.current.distance = 25;
       lightRef1.current.decay = 2;
       lightRef1.current.penumbra = 0.8;
       flashRef.current.add(lightRef1.current);
@@ -91,8 +102,8 @@ const Controls = () => {
       //Light 2
       lightRef2.current.intensity = 40;
       lightRef2.current.angle = 0.35 + Math.sin(time * 950) * 0.0012;
-      lightRef2.current.distance = 30;
-      lightRef2.current.decay = 2;
+      lightRef2.current.distance = 35;
+      lightRef2.current.decay = 2.5;
       lightRef2.current.penumbra = 0.1;
       flashRef.current.add(lightRef2.current);
       flashRef.current.add(lightRef2.current.target);
@@ -100,9 +111,9 @@ const Controls = () => {
       lightRef2.current.shadow.bias = 0.0001;
       //Light 3
       lightRef3.current.intensity = 150;
-      lightRef3.current.angle = 0.285;
-      lightRef3.current.distance = 30;
-      lightRef3.current.decay = 2;
+      lightRef3.current.angle = 0.25;
+      lightRef3.current.distance = 35;
+      lightRef3.current.decay = 2.75;
       lightRef3.current.penumbra = 0.5;
       flashRef.current.add(lightRef3.current);
       flashRef.current.add(lightRef3.current.target);
@@ -139,6 +150,13 @@ const Controls = () => {
       >
         <Capsule castShadow args={[0.48, 0.4, 0.4]}>
           <meshStandardMaterial />
+         { canPlay && <PositionalAudio
+            autoplay
+            ref={playRef}
+            load={THREE.AudioLoader}
+            url={walking}
+          />
+        }
         </Capsule>
       </RigidBody>
 

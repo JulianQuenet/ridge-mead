@@ -3,22 +3,25 @@ import { Physics} from "@react-three/rapier";
 import Controls from "./Controls";
 import Scene from "./scene";
 import { Loader, Stars } from "@react-three/drei";
+import {Loading} from "./components/LoadingScreen"
+import { useState } from "react";
 
 
 function App() {
+ const [ start, setStart] = useState<Boolean>(false)
+
+ const handleStart = ()=>{
+  setStart(true)
+ }
   return (
     <>
-    <Canvas
+    { start &&
+      <>
+      <Canvas
       shadows
       camera={{ fov: 50, position:[5,3,2] }}
     >
       {/* <ambientLight intensity={1}/> */}
-      <directionalLight
-        position={[-5, 25, -50]}
-        intensity={0.05}
-        castShadow
-        shadow-mapSize={5024}
-      />
 
       <color attach="background" args={["black"]} />
       <Physics>
@@ -28,6 +31,10 @@ function App() {
       <Stars />
     </Canvas>
     <Loader />
+    </>
+      }
+
+      { !start && <Loading toggle={handleStart}/>}
     </>
   );
 }

@@ -11,7 +11,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       globalStyles :(_theme) => ({
         body: {
           width:"100vw",
-          height:"100vh"
+          height:"100vh",
+          backgroundColor:"black"
         },
         "#root":{
           width:"100%",
