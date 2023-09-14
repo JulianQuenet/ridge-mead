@@ -3,7 +3,7 @@ import { Physics} from "@react-three/rapier";
 import Controls from "./Controls";
 import Scene from "./scene";
 import { Loader, Stars } from "@react-three/drei";
-import {Loading} from "./components/LoadingScreen"
+import {Loading} from "./components/StartScreen"
 import { useState } from "react";
 
 

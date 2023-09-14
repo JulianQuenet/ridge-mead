@@ -12,7 +12,8 @@ import { Flashlight } from "./components/Flash-lite_flashlight";
 
 const Controls = () => {
   const [canPlay, setCanPlay] = useState<any>(false);
-  const walking = "./sounds/step_cloth1.ogg"
+  const walking = "./sounds/footsteps.mp3"
+  const backGround = "./sounds/deepSpace.mp3"
   const playRef = useRef<any>();
   const flashRef = useRef<any>();
   const lightRef1 = useRef<any>();
@@ -36,6 +37,7 @@ const Controls = () => {
 
   useFrame(() => {
     const time = Date.now() * 0.0005;
+    const timeWalking = Date.now() * 0.00095
     if (playerRef.current) {
       playerRef.current.lockRotations(true, true); //Locks rotation because of capsule body
       const position = playerRef.current.translation();
@@ -43,10 +45,10 @@ const Controls = () => {
       camera.position.x = position.x;
       camera.position.z = position.z;
       if (right || left || forward || backward) {
-        camera.position.y = position.y + Math.sin(time * 15) * 0.065 + 1.25;
-        setCanPlay(false)
+        camera.position.y = position.y + Math.sin(timeWalking * 7.5) * 0.095 + 1.25;
+        setCanPlay(true)
       } else {
-        camera.position.y = position.y + Math.sin(time * 5) * 0.025 + 1.25;
+        camera.position.y = position.y + Math.sin(time * 5) * 0.035 + 1.25;
         setCanPlay(false)
       }
       //Player movement base on camera direction/rotation
@@ -78,10 +80,10 @@ const Controls = () => {
     if (flashRef.current && camera) {
       // Update flashlight's position with offsets relative to camera
       flashRef.current.position.copy(camera.position);
-      (flashRef.current.position.y =
+      flashRef.current.position.y =
         camera.position.y -
         0.15 +
-        Math.sin(time * 3.5 + camera.position.x + camera.position.z) * 0.01), //Breathing affect
+        Math.sin(time * 3.5) * 0.01 //Breathing affect
         flashRef.current.updateMatrix();
       //Setting up flashlight rotation
       flashRef.current.rotation.copy(camera.rotation);
@@ -103,7 +105,7 @@ const Controls = () => {
       lightRef2.current.intensity = 40;
       lightRef2.current.angle = 0.35 + Math.sin(time * 950) * 0.0012;
       lightRef2.current.distance = 35;
-      lightRef2.current.decay = 2.5;
+      lightRef2.current.decay = 2.25;
       lightRef2.current.penumbra = 0.1;
       flashRef.current.add(lightRef2.current);
       flashRef.current.add(lightRef2.current.target);
@@ -113,7 +115,7 @@ const Controls = () => {
       lightRef3.current.intensity = 150;
       lightRef3.current.angle = 0.25;
       lightRef3.current.distance = 35;
-      lightRef3.current.decay = 2.75;
+      lightRef3.current.decay = 2.5;
       lightRef3.current.penumbra = 0.5;
       flashRef.current.add(lightRef3.current);
       flashRef.current.add(lightRef3.current.target);
@@ -121,6 +123,9 @@ const Controls = () => {
       lightRef3.current.shadow.bias = 0.0001;
       //Back Flash
       flashRef.current.add(lightRef4.current);
+    }
+    if(playRef.current){
+      playRef.current.position.z = -1.25
     }
   }
 
@@ -157,6 +162,11 @@ const Controls = () => {
             url={walking}
           />
         }
+        <PositionalAudio 
+        autoplay
+        load={THREE.AudioLoader}
+        url={backGround}
+        />
         </Capsule>
       </RigidBody>
 

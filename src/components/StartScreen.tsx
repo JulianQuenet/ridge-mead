@@ -1,10 +1,13 @@
 
+
 interface loadingProps{
     toggle: ()=> void
 }
 
 export const Loading = (props:loadingProps) => {
 const {toggle} = props
+
+
   return (
     <>
       <div
@@ -17,7 +20,7 @@ const {toggle} = props
           alignItems:"center"
         }}
       >
-        <button onClick={toggle}>Start</button>
+        <button className="start-button" onClick={toggle}>START</button>
       </div>
     </>
   );
