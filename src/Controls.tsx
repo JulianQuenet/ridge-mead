@@ -46,7 +46,7 @@ const Controls = () => {
       camera.position.z = position.z;
       if (right || left || forward || backward) {
         camera.position.y = position.y + Math.sin(timeWalking * 7.5) * 0.095 + 1.25;
-        setCanPlay(true)
+        setCanPlay(false)
       } else {
         camera.position.y = position.y + Math.sin(time * 5) * 0.035 + 1.25;
         setCanPlay(false)
