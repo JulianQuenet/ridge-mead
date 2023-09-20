@@ -10,7 +10,15 @@ import usePlayerControls from "./components/inputs";
 import * as THREE from "three";
 import { Flashlight } from "./components/Flash-lite_flashlight";
 
-const Controls = () => {
+interface triggerProps{
+  pic : any;
+  writing : any;
+  room : any;
+}
+
+const Controls = (props: triggerProps) => {
+  const {pic, writing, room} = props
+
   const [canPlay, setCanPlay] = useState<any>(false);
   const walking = "./sounds/footsteps.mp3"
   const backGround = "./sounds/deepSpace.mp3"
@@ -30,7 +38,7 @@ const Controls = () => {
   
   const { forward, backward, left, right } = usePlayerControls();
   useEffect(() => {
-    camera.rotation.y = 0;
+    camera.rotation.y = 14.125;
     camera.rotation.x = 0;
     camera.rotation.z = 0;
   }, []);
@@ -70,9 +78,24 @@ const Controls = () => {
     const listener = new THREE.AudioListener();
     camera.add(listener);
     setFlash();
-    // if(right){
-    //   console.log(lightRef3.current)
-    // }
+    if(right){
+      console.log(playerRef.current.translation().x)
+    }
+    if(playRef.current){
+      let x = playRef.current.translation().x
+      let z = playRef.current.translation().z
+      let count = 0
+      if(x < 3 && z > 37.5){
+        writing(true)
+      }
+      if(x > 3 && z < 37.5){
+        pic(true)
+        count + 1
+      }
+      if(x < 3 && z > 37.5 && count ===1){
+        room(true)
+      }
+    }
   });
 
   function setFlash() {
@@ -148,7 +171,7 @@ const Controls = () => {
       <PointerLockControls />
 
       <RigidBody
-        position={[1.75, 1.85, 41.19]}
+        position={[13.25, 1.85, 34.47]}
         ref={playerRef}
         colliders={"ball"}
         args={[2, 2, 2]}

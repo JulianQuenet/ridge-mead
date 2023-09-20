@@ -1,16 +1,25 @@
 
 import { RigidBody } from "@react-three/rapier";
-import { Model } from "./components/BackRooms";
+import { Backrooms } from "./components/BackRooms";
 import { Nurse } from "./components/Nurse";
 import { NurseHead } from "./components/NurseHead";
 
-const Scene = () => {
 
+interface triggerProps{
+  pic : Boolean;
+  writing : Boolean;
+  room : Boolean;
+}
+
+
+
+const Scene = (props:triggerProps) => {
+  const {pic, writing, room} = props
 
   return (
     <>
       <RigidBody type="fixed" position={[5,0.2,0]} colliders="trimesh">
-        <Model />
+        <Backrooms pic={pic} writing={writing} room={room}/>
       </RigidBody>
 
       <RigidBody lockTranslations colliders="trimesh"> 
