@@ -20,6 +20,8 @@ const Controls = (props: triggerProps) => {
   const {pic, writing, room} = props
 
   const [canPlay, setCanPlay] = useState<any>(false);
+  const [changeRoom, setChangeRoom] = useState<Boolean>(false)
+  const [changePic, setChangePic] = useState<Boolean>(false)
   const walking = "./sounds/footsteps.mp3"
   const backGround = "./sounds/deepSpace.mp3"
   const playRef = useRef<any>();
@@ -74,28 +76,27 @@ const Controls = (props: triggerProps) => {
       );
 
       playerRef.current.setAdditionalMass(0.5);
+      let x = position.x
+      let z = position.z
+      if(x < 3 && z > 37){
+        writing(true)
+        setChangePic(true)
+      }
+      if(x > 3 && z < 37 && changePic){
+        pic(true)
+        setChangeRoom(true)
+      }
+      if(x < 3 && z > 37 && changeRoom){
+        room(true)
+      }
     }
     const listener = new THREE.AudioListener();
     camera.add(listener);
     setFlash();
-    if(right){
-      console.log(playerRef.current.translation().x)
-    }
-    if(playRef.current){
-      let x = playRef.current.translation().x
-      let z = playRef.current.translation().z
-      let count = 0
-      if(x < 3 && z > 37.5){
-        writing(true)
-      }
-      if(x > 3 && z < 37.5){
-        pic(true)
-        count + 1
-      }
-      if(x < 3 && z > 37.5 && count ===1){
-        room(true)
-      }
-    }
+    // if(right){
+    //   console.log(playerRef.current.translation().x)
+    // }
+    
   });
 
   function setFlash() {
@@ -171,7 +172,7 @@ const Controls = (props: triggerProps) => {
       <PointerLockControls />
 
       <RigidBody
-        position={[13.25, 1.85, 34.47]}
+        position={[13.25, 1.95, 34.47]}
         ref={playerRef}
         colliders={"ball"}
         args={[2, 2, 2]}

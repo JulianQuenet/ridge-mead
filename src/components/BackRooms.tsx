@@ -15,7 +15,7 @@ interface triggerProps{
 
 export function Backrooms(props: triggerProps) {
 
-  const {pic, writing, room} = props
+  const {pic} = props
 
   const { scene, nodes, materials }: any = useGLTF("/backRooms.glb");
 
@@ -36,7 +36,6 @@ export function Backrooms(props: triggerProps) {
   }, [materials, nodes, scene]);
 
   const picture = pic ? "Notice_board.new.001" : "Notice_board"
-  const sense = writing? "Walls" : "Walls.001"
 
   return (
     <group dispose={null}>
@@ -55,23 +54,6 @@ export function Backrooms(props: triggerProps) {
     {/* <group position={[-5.669, 1.976, 42.462]} rotation={[Math.PI, -1.563, Math.PI]} scale={[2.319, 1.849, 2.073]}>
       <mesh geometry={nodes.Object_14.geometry} material={materials.Pillars} position={[0, 0.012, 0]} />
     </group> */}
-    { !room && <group rotation={[-Math.PI / 2, 0, 0]} scale={[0.02, 0.017, 0.015]}>
-      <group rotation={[Math.PI / 2, 0, 0]}>
-        <group position={[154.73, 167.839, 79.536]} rotation={[Math.PI, 0, Math.PI]}>
-          <mesh geometry={nodes.Window_Window_0.geometry} material={materials['Window.001']} position={[-8.814, 6.47, -2081.853]} rotation={[0, -Math.PI / 2, 0]} scale={[1, 1.079, 1.023]} />
-        </group>
-        <mesh geometry={nodes.Walls_Walls_0.geometry} material={materials[sense]} position={[241.756, 9.178, 1965]} rotation={[0, -Math.PI / 2, 0]} scale={[1.247, 1, 1]} />
-      </group>
-    </group>}
-    <group position={[-0.814, 3.611, 34.363]} rotation={[-Math.PI / 2, 0.313, 1.561]} scale={[0.26, 0.349, 0.346]}>
-      <group rotation={[Math.PI / 2, 0, 0]}>
-        <mesh geometry={nodes.defaultMaterial007.geometry} material={materials['Black_Glass.001']} />
-        <mesh geometry={nodes.defaultMaterial008.geometry} material={materials['Camera_Plastic.001']} />
-      </group>
-    </group>
-    { !room && <group position={[4.751, 0, 42.75]} rotation={[-Math.PI / 2, 0, 3.139]}>
-      <mesh geometry={nodes.Object_2.geometry} material={materials.material} position={[0.004, -1.704, 0]} />
-    </group>}
     <group rotation={[-Math.PI / 2, 0, 0]}>
       <mesh geometry={nodes.Object_2001.geometry} material={materials.Table} position={[-3.396, -42.208, 0.064]} scale={[0.077, 0.054, 0.067]} />
     </group>
@@ -107,7 +89,7 @@ export function Backrooms(props: triggerProps) {
     <mesh geometry={nodes['F-material022'].geometry} material={materials.walls} position={[-9.01, 2.099, 29.268]} rotation={[-Math.PI / 2, -Math.PI / 2, 0]} scale={[2, 1, 1]} />
     {/* <mesh geometry={nodes['F-material023'].geometry} material={materials.walls} position={[5.064, 2.099, 45.587]} rotation={[0, 1.567, 1.571]} scale={[2, 1, 0.512]} /> */}
     <mesh geometry={nodes['F-material024'].geometry} material={materials.walls} position={[-13.571, 2.099, 56.478]} rotation={[0, 0, Math.PI / 2]} scale={[2, 1, 1]} />
-    <mesh geometry={nodes['door#2'].geometry} material={materials.board} position={[-12.166, 0.137, 50.252]} rotation={[-Math.PI / 2, 0, Math.PI / 2]} scale={[0.171, 0.085, 0.166]} />
+    {/* <mesh geometry={nodes['door#2'].geometry} material={materials.board} position={[-12.166, 0.137, 50.252]} rotation={[-Math.PI / 2, 0, Math.PI / 2]} scale={[0.171, 0.085, 0.166]} /> */}
     <mesh geometry={nodes['F-material001'].geometry} material={materials.walls} position={[-13.591, 2.099, 45.497]} rotation={[Math.PI / 2, Math.PI / 2, 0]} scale={[2, 1, 1]} />
     <mesh geometry={nodes['M-material004'].geometry} material={materials.board} position={[-1.257, 2.199, 34.232]} rotation={[-Math.PI / 2, 0, 0]} scale={[0.137, 0.083, 0.166]} />
     <mesh geometry={nodes['F-material002'].geometry} material={materials.walls} position={[-4.875, 2.099, 32.206]} rotation={[-Math.PI / 2, -Math.PI / 2, 0]} scale={[2, 0.497, 0.726]} />
@@ -187,7 +169,7 @@ export function Backrooms(props: triggerProps) {
       <mesh geometry={nodes.P_ceiling_2x2_2001_Material_0005_63.geometry} material={materials.ceiling} />
     </group>
     <mesh geometry={nodes['F-material014'].geometry} material={materials['walls.003']} position={[-13.591, 2.099, 45.497]} rotation={[Math.PI / 2, Math.PI / 2, 0]} scale={[2, 1, 1]} />
-    <mesh geometry={nodes.doorRef2.geometry} material={materials['walls.004']} position={[-2.487, 2.099, 50.2]} rotation={[Math.PI, 0, -Math.PI / 2]} scale={[2, 1, 0.961]} />
+    {/* <mesh geometry={nodes.doorRef2.geometry} material={materials['walls.004']} position={[-2.487, 2.099, 50.2]} rotation={[Math.PI, 0, -Math.PI / 2]} scale={[2, 1, 0.961]} /> */}
   </group>
   );
 }

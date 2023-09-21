@@ -3,6 +3,7 @@ import { RigidBody } from "@react-three/rapier";
 import { Backrooms } from "./components/BackRooms";
 import { Nurse } from "./components/Nurse";
 import { NurseHead } from "./components/NurseHead";
+import { SideRoom } from "./components/SideRoom";
 
 
 interface triggerProps{
@@ -27,6 +28,10 @@ const Scene = (props:triggerProps) => {
       </RigidBody>
 
       <NurseHead />
+
+     { !room &&  <RigidBody type="fixed" colliders="trimesh">
+        <SideRoom writing ={writing}/>
+      </RigidBody>}
       
     </>
   );

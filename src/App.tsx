@@ -15,6 +15,9 @@ function App() {
 
  const handleStart = ()=>{
   setStart(true)
+  setJohnny(false)
+  setNothing(false)
+  setInteg(false)
  }
 
 
