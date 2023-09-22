@@ -9,6 +9,7 @@ import { RigidBody } from "@react-three/rapier";
 import usePlayerControls from "./components/inputs";
 import * as THREE from "three";
 import { Flashlight } from "./components/Flash-lite_flashlight";
+import { buffer } from "three/examples/jsm/nodes/Nodes.js";
 
 interface triggerProps{
   pic : any;
@@ -44,6 +45,8 @@ const Controls = (props: triggerProps) => {
     camera.rotation.x = 0;
     camera.rotation.z = 0;
   }, []);
+
+  const listener = new THREE.AudioListener();
 
   useFrame(() => {
     const time = Date.now() * 0.0005;
@@ -90,7 +93,6 @@ const Controls = (props: triggerProps) => {
         room(true)
       }
     }
-    const listener = new THREE.AudioListener();
     camera.add(listener);
     setFlash();
     // if(right){
@@ -150,6 +152,7 @@ const Controls = (props: triggerProps) => {
     }
     if(playRef.current){
       playRef.current.position.z = -1.25
+      playRef.current.setBuffer(buffer)
     }
   }
 
@@ -190,6 +193,8 @@ const Controls = (props: triggerProps) => {
         autoplay
         load={THREE.AudioLoader}
         url={backGround}
+        listener={listener}
+        ref={playRef}
         />
         </Capsule>
       </RigidBody>

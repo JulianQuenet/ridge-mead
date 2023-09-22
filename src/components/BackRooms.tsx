@@ -15,7 +15,7 @@ interface triggerProps{
 
 export function Backrooms(props: triggerProps) {
 
-  const {pic} = props
+  const {pic, room} = props
 
   const { scene, nodes, materials }: any = useGLTF("/backRooms.glb");
 
@@ -87,7 +87,7 @@ export function Backrooms(props: triggerProps) {
     </group>
     <mesh geometry={nodes.doorRef.geometry} material={materials.walls} position={[-2.488, 2.099, 50.2]} rotation={[Math.PI, 0, -Math.PI / 2]} scale={[2, 1, 0.961]} />
     <mesh geometry={nodes['F-material022'].geometry} material={materials.walls} position={[-9.01, 2.099, 29.268]} rotation={[-Math.PI / 2, -Math.PI / 2, 0]} scale={[2, 1, 1]} />
-    {/* <mesh geometry={nodes['F-material023'].geometry} material={materials.walls} position={[5.064, 2.099, 45.587]} rotation={[0, 1.567, 1.571]} scale={[2, 1, 0.512]} /> */}
+    { room && <mesh geometry={nodes['F-material023'].geometry} material={materials.walls} position={[5.064, 2.099, 45.587]} rotation={[0, 1.567, 1.571]} scale={[2, 1, 0.512]} />}
     <mesh geometry={nodes['F-material024'].geometry} material={materials.walls} position={[-13.571, 2.099, 56.478]} rotation={[0, 0, Math.PI / 2]} scale={[2, 1, 1]} />
     {/* <mesh geometry={nodes['door#2'].geometry} material={materials.board} position={[-12.166, 0.137, 50.252]} rotation={[-Math.PI / 2, 0, Math.PI / 2]} scale={[0.171, 0.085, 0.166]} /> */}
     <mesh geometry={nodes['F-material001'].geometry} material={materials.walls} position={[-13.591, 2.099, 45.497]} rotation={[Math.PI / 2, Math.PI / 2, 0]} scale={[2, 1, 1]} />
