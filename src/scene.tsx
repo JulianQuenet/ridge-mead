@@ -4,6 +4,7 @@ import { Backrooms } from "./components/BackRooms";
 import { Nurse } from "./components/Nurse";
 import { NurseHead } from "./components/NurseHead";
 import { SideRoom } from "./components/SideRoom";
+import { Walls } from "./components/WallsPillars";
 
 
 interface triggerProps{
@@ -20,7 +21,7 @@ const Scene = (props:triggerProps) => {
   return (
     <>
       <RigidBody type="fixed" position={[5,0.2,0]} colliders="trimesh">
-        <Backrooms pic={pic} writing={writing} room={room}/>
+        <Backrooms pic={pic}/>
       </RigidBody>
 
       <RigidBody lockTranslations colliders="trimesh"> 
@@ -33,6 +34,8 @@ const Scene = (props:triggerProps) => {
         <SideRoom writing ={writing}/>
       </RigidBody>}
       
+
+      <Walls room={room}/>
     </>
   );
 };

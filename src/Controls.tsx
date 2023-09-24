@@ -25,7 +25,8 @@ const Controls = (props: triggerProps) => {
   const [changePic, setChangePic] = useState<Boolean>(false)
   const walking = "./sounds/footsteps.mp3"
   const backGround = "./sounds/deepSpace.mp3"
-  const playRef = useRef<any>();
+  const soundRef1 = useRef<any>();
+  const soundRef2 = useRef<any>();
   const flashRef = useRef<any>();
   const lightRef1 = useRef<any>();
   const lightRef2 = useRef<any>();
@@ -59,7 +60,7 @@ const Controls = (props: triggerProps) => {
       camera.position.z = position.z;
       if (right || left || forward || backward) {
         camera.position.y = position.y + Math.sin(timeWalking * 7.5) * 0.095 + 1.25;
-        setCanPlay(false)
+        setCanPlay(true)
       } else {
         camera.position.y = position.y + Math.sin(time * 5) * 0.035 + 1.25;
         setCanPlay(false)
@@ -150,9 +151,9 @@ const Controls = (props: triggerProps) => {
       //Back Flash
       flashRef.current.add(lightRef4.current);
     }
-    if(playRef.current){
-      playRef.current.position.z = -1.25
-      playRef.current.setBuffer(buffer)
+    if(soundRef1.current){
+      soundRef1.current.position.z = -1.25
+      soundRef1.current.setBuffer(buffer)
     }
   }
 
@@ -184,7 +185,7 @@ const Controls = (props: triggerProps) => {
           <meshStandardMaterial />
          { canPlay && <PositionalAudio
             autoplay
-            ref={playRef}
+            ref={soundRef1}
             load={THREE.AudioLoader}
             url={walking}
           />
@@ -194,7 +195,7 @@ const Controls = (props: triggerProps) => {
         load={THREE.AudioLoader}
         url={backGround}
         listener={listener}
-        ref={playRef}
+        ref={soundRef2}
         />
         </Capsule>
       </RigidBody>
@@ -202,10 +203,6 @@ const Controls = (props: triggerProps) => {
       <mesh position={[5, 3, -5]} ref={flashRef}>
         <Flashlight />
       </mesh>
-
-      {/* <Box ref={testRef} position={[1.75, 1.85, 39.19]} >
-      <meshStandardMaterial />
-      </Box> */}
     </>
   );
 };
