@@ -5,6 +5,7 @@ Command: npx gltfjsx@6.2.10 sideRoom.glb
 
 import { useGLTF } from "@react-three/drei";
 
+
 interface triggerProps {
   writing: Boolean;
 }
@@ -13,7 +14,8 @@ export function SideRoom(props: triggerProps) {
   const { writing } = props;
   const { nodes, materials }: any = useGLTF("/sideRoom.glb");
 
-  const sense = writing ? "Walls" : "Walls.001";
+  const sense = writing ? "text" : "Walls.001";
+
 
   return (
     <group dispose={null}>

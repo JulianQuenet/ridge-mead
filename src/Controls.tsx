@@ -15,14 +15,16 @@ interface triggerProps{
   pic : any;
   writing : any;
   room : any;
+  pillars : any;
 }
 
 const Controls = (props: triggerProps) => {
-  const {pic, writing, room} = props
+  const {pic, writing, room, pillars} = props
 
   const [canPlay, setCanPlay] = useState<any>(false);
   const [changeRoom, setChangeRoom] = useState<Boolean>(false)
   const [changePic, setChangePic] = useState<Boolean>(false)
+  const [seePillars, setSeePillars] = useState<Boolean>(false)
   const walking = "./sounds/footsteps.mp3"
   const backGround = "./sounds/deepSpace.mp3"
   const soundRef1 = useRef<any>();
@@ -92,12 +94,16 @@ const Controls = (props: triggerProps) => {
       }
       if(x < 3 && z > 37 && changeRoom){
         room(true)
+        setSeePillars(true)
+      }
+      if(x >10.5 && z < 29.5 && seePillars){
+        pillars(true)
       }
     }
     camera.add(listener);
     setFlash();
     // if(right){
-    //   console.log(playerRef.current.translation().x)
+    //   console.log(playerRef.current.translation())
     // }
     
   });
