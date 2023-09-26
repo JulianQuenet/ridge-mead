@@ -12,12 +12,13 @@ interface triggerProps{
   writing : Boolean;
   room : Boolean;
   support : Boolean;
+  helper : Boolean;
 }
 
 
 
 const Scene = (props:triggerProps) => {
-  const {pic, writing, room, support} = props
+  const {pic, writing, room, support, helper} = props
 
   return (
     <>
@@ -25,11 +26,13 @@ const Scene = (props:triggerProps) => {
         <Backrooms pic={pic}/>
       </RigidBody>
 
-      <RigidBody lockTranslations colliders="trimesh"> 
+     { helper &&  <RigidBody lockTranslations colliders="trimesh"> 
         <Nurse />  
-      </RigidBody>
+      </RigidBody>}
 
-      <NurseHead />
+      { helper && 
+        <NurseHead />
+        }
 
      { !room &&  <RigidBody type="fixed" colliders="trimesh">
         <SideRoom writing ={writing}/>

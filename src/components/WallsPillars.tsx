@@ -31,7 +31,7 @@ export function Walls(props: triggerProps) {
       {support && (
         <RigidBody type="fixed" colliders={"trimesh"}>
           <group
-            position={[-0.75, 2.0991, 42.462]}
+            position={[-0.75, 2.0991, 40.5]}
             rotation={[Math.PI, -1.563, Math.PI]}
             scale={[2.319, 1.849, 2.073]}
           >

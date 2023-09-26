@@ -16,10 +16,11 @@ interface triggerProps{
   writing : any;
   room : any;
   pillars : any;
+  nurse: any;
 }
 
 const Controls = (props: triggerProps) => {
-  const {pic, writing, room, pillars} = props
+  const {pic, writing, room, pillars, nurse} = props
 
   const [canPlay, setCanPlay] = useState<any>(false);
   const [changeRoom, setChangeRoom] = useState<Boolean>(false)
@@ -96,14 +97,17 @@ const Controls = (props: triggerProps) => {
         room(true)
         setSeePillars(true)
       }
-      if(x >10.5 && z < 29.5 && seePillars){
+      if(x >10.5 && z < 28.5 && seePillars){
         pillars(true)
+        if((camera.rotation.y > 1.2 || camera.rotation.y < -1.35) && z > 26){
+          nurse(true)
+        }
       }
     }
     camera.add(listener);
     setFlash();
     // if(right){
-    //   console.log(playerRef.current.translation())
+    //   console.log(playerRef.current.translation().z)
     // }
     
   });

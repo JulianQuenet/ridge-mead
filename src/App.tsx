@@ -13,6 +13,7 @@ function App() {
  const [ nothing, setNothing] = useState<Boolean>(false)
  const [ integ, setInteg] =useState<Boolean>(false)
  const [pillars, setPillars] = useState<Boolean>(false)
+ const [ nurse, setNurse] = useState<Boolean>(false)
 
  const handleStart = ()=>{
   setStart(true)
@@ -20,6 +21,7 @@ function App() {
   setNothing(false)
   setInteg(false)
   setPillars(false)
+  setNurse(false)
  }
 
 
@@ -36,8 +38,8 @@ function App() {
 
       <color attach="background" args={["black"]} />
       <Physics>
-        <Controls pic={setJohnny} writing={setNothing} room={setInteg} pillars={setPillars} />
-        <Scene pic={johnny} writing={nothing} room={integ} support={pillars}/>
+        <Controls pic={setJohnny} writing={setNothing} room={setInteg} pillars={setPillars} nurse={setNurse} />
+        <Scene helper={nurse} pic={johnny} writing={nothing} room={integ} support={pillars}/>
       </Physics>
       <Stars />
     </Canvas>

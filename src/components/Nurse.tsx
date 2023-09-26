@@ -10,9 +10,9 @@ export function Nurse() {
   const { nodes, materials }:any = useGLTF('/nurse.glb')
  
   return (
-    <group position={[14.35, 0.35, 58.92]} dispose={null}>
+    <group position={[15.35, 0.35, 25.67]} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, -2.558]} scale={[0.145, 0.128, 0.155]}>
-        <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <group rotation={[Math.PI / 2, 14.25, 0]} scale={0.01}>
           <group position={[0, 0, -0.005]}>
             <mesh castShadow geometry={nodes.belt1_lp_belt_0.geometry} material={materials['belt.002']} position={[0, 0, -0.005]} rotation={[-1.309, 0, -Math.PI]} scale={[107.331, 78.68, 116.335]} />
             <mesh castShadow geometry={nodes.belt2_lp_belt_0.geometry} material={materials['belt.002']} position={[0, 0, -0.005]} rotation={[-1.163, -0.038, 3.053]} scale={[107.331, 78.68, 85.585]} />
