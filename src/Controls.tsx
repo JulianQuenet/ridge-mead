@@ -99,7 +99,7 @@ const Controls = (props: triggerProps) => {
       }
       if(x >10.5 && z < 28.5 && seePillars){
         pillars(true)
-        if((camera.rotation.y > 1.2 || camera.rotation.y < -1.35) && z > 26){
+        if((camera.rotation.y > 1.2 || camera.rotation.y < -1.35) && z > 25.5){
           nurse(true)
         }
       }

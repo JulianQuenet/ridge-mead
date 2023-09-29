@@ -43,13 +43,17 @@ export function Walls(props: triggerProps) {
           </group>
         </RigidBody>
       )}
-      <group rotation={[-Math.PI / 2, 0, 0]} scale={0.104}>
+      
+     { support && (<group rotation={[-Math.PI / 2, 0, 0]} scale={0.104}>
         <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
           <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-              <mesh geometry={nodes.body_lp_body_0.geometry} material={materials.body} position={[116, -290, -10]} rotation={[0, 0.08, -1.529]} scale={[1.55, 1.5, 1.65]} />
+              <mesh geometry={nodes.body_lp_body_0.geometry} material={materials.body} position={[115, -290, -10]} rotation={[0, 0.08, -1.529]} scale={[1.55, 1.5, 1.65]} />
           </group>
         </group>
-      </group>
+      </group>)}
+
+
+
       <group
         position={[2.5, 2.099, 50.2]}
         rotation={[Math.PI, 0, -Math.PI / 2]}
