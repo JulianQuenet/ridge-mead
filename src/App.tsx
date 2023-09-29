@@ -2,7 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { Physics} from "@react-three/rapier";
 import Controls from "./Controls";
 import Scene from "./scene";
-// import { Loader, Stars } from "@react-three/drei";
+// import { Loader} from "@react-three/drei";
 import {Loading} from "./components/StartScreen"
 import { useState } from "react";
 
@@ -41,7 +41,6 @@ function App() {
         <Controls pic={setJohnny} writing={setNothing} room={setInteg} pillars={setPillars} nurse={setNurse} />
         <Scene helper={nurse} pic={johnny} writing={nothing} room={integ} support={pillars}/>
       </Physics>
-      <Stars />
     </Canvas>
     {/* <Loader /> */}
     </>
