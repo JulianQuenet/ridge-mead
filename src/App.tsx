@@ -43,7 +43,7 @@ function App() {
       </Physics>
       <Stars />
     </Canvas>
-    <Loader />
+    {/* <Loader /> */}
     </>
       }
 
