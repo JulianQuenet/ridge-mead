@@ -99,9 +99,10 @@ const Controls = (props: triggerProps) => {
       }
       if(x >10.5 && z < 28.5 && seePillars){
         pillars(true)
-        if((camera.rotation.y > 1.2 || camera.rotation.y < -1.35)){
+        
+        setTimeout(()=>{
           nurse(true)
-        }
+        }, 3500)
       }
     }
     camera.add(listener);
@@ -164,6 +165,7 @@ const Controls = (props: triggerProps) => {
     if(soundRef1.current){
       soundRef1.current.position.z = -1.25
       soundRef1.current.setBuffer(buffer)
+      soundRef2.current.setBuffer(buffer)
     }
   }
 

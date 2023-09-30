@@ -78,7 +78,7 @@ export function Backrooms(props: triggerProps) {
       <mesh geometry={nodes['F-material022'].geometry} material={materials['walls.006']} position={[-9.01, 2.099, 29.268]} rotation={[-Math.PI / 2, -Math.PI / 2, 0]} scale={[2, 1, 1]} />
       <mesh geometry={nodes['F-material024'].geometry} material={materials['walls.006']} position={[-13.571, 2.099, 56.478]} rotation={[0, 0, Math.PI / 2]} scale={[2, 1, 1]} />
       <mesh geometry={nodes['F-material001'].geometry} material={materials['walls.006']} position={[-13.591, 2.099, 45.497]} rotation={[Math.PI / 2, Math.PI / 2, 0]} scale={[2, 1, 1]} />
-      <mesh geometry={nodes['M-material004'].geometry} material={materials['board.002']} position={[-1.257, 2.199, 34.232]} rotation={[-Math.PI / 2, 0, 0]} scale={[0.137, 0.083, 0.166]} />
+      <mesh geometry={nodes['M-material004'].geometry} material={materials['board.003']} position={[-1.257, 2.199, 34.232]} rotation={[-Math.PI / 2, 0, 0]} scale={[0.137, 0.083, 0.166]} />
       <mesh geometry={nodes['F-material002'].geometry} material={materials['walls.006']} position={[-4.875, 2.099, 32.206]} rotation={[-Math.PI / 2, -Math.PI / 2, 0]} scale={[2, 0.497, 0.726]} />
       <mesh geometry={nodes['F-material003'].geometry} material={materials['walls.006']} position={[-1.311, 2.099, 32.23]} rotation={[-Math.PI / 2, -Math.PI / 2, 0]} scale={[2, 0.497, 0.726]} />
       <mesh geometry={nodes['F-material004'].geometry} material={materials['walls.006']} position={[-1.65, 2.099, 31.731]} rotation={[Math.PI, -0.023, -Math.PI / 2]} scale={[2, 0.497, 0.726]} />
