@@ -99,11 +99,12 @@ const Controls = (props: triggerProps) => {
       }
       if(x >10.5 && z < 28.5 && seePillars){
         pillars(true)
-        
         setTimeout(()=>{
           nurse(true)
         }, 3500)
       }
+
+      
     }
     camera.add(listener);
     setFlash();
