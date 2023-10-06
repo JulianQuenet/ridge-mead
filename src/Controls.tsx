@@ -17,15 +17,19 @@ interface triggerProps{
   room : any;
   pillars : any;
   nurse: any;
+  door: any;
+  audio: any;
 }
 
 const Controls = (props: triggerProps) => {
-  const {pic, writing, room, pillars, nurse} = props
+  const {pic, writing, room, pillars, nurse, door, audio} = props
 
   const [canPlay, setCanPlay] = useState<any>(false);
   const [changeRoom, setChangeRoom] = useState<Boolean>(false)
   const [changePic, setChangePic] = useState<Boolean>(false)
   const [seePillars, setSeePillars] = useState<Boolean>(false)
+  const [bringDoor, setBringDoor] = useState<Boolean>(false)
+  const [changeAudio, setChangeAudio] = useState<Boolean>(false)
   const walking = "./sounds/footsteps.mp3"
   const backGround = "./sounds/deepSpace.mp3"
   const soundRef1 = useRef<any>();
@@ -102,15 +106,22 @@ const Controls = (props: triggerProps) => {
         setTimeout(()=>{
           nurse(true)
         }, 3500)
+        setBringDoor(true)
+      }
+      if(z > 45 && bringDoor){
+         door(true)
+         setChangeAudio(true)
+      }
+      if(x> 9 && z < 56 && changeAudio){
+         audio(true)
       }
 
-      
     }
     camera.add(listener);
     setFlash();
-    // if(right){
-    //   console.log(playerRef.current.translation().z)
-    // }
+    if(right){
+      console.log(playerRef.current.translation())
+    }
     
   });
 

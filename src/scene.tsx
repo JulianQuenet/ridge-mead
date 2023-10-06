@@ -13,17 +13,19 @@ interface triggerProps{
   room : Boolean;
   support : Boolean;
   helper : Boolean;
+  door: Boolean;
+  audio: Boolean;
 }
 
 
 
 const Scene = (props:triggerProps) => {
-  const {pic, writing, room, support, helper} = props
+  const {pic, writing, room, support, helper, door, audio} = props
 
   return (
     <>
       <RigidBody type="fixed" position={[5,0.2,0]} colliders="trimesh">
-        <Backrooms pic={pic}/>
+        <Backrooms pic={pic} door={door} audio={audio}/>
       </RigidBody>
 
      { helper &&  <RigidBody lockTranslations colliders="trimesh"> 
