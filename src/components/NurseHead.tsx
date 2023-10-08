@@ -24,8 +24,7 @@ export function NurseHead() {
 
  useEffect(()=>{
   console.log(ref.current)
-  ref.current.setRolloffFactor(15)
-  ref.current.setMaxDistance(0.31)
+  ref.current.setRolloffFactor(7.5)
   ref.current.setBuffer(buffer)
  },[])
 

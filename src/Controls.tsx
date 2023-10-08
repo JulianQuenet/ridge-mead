@@ -112,8 +112,9 @@ const Controls = (props: triggerProps) => {
          door(true)
          setChangeAudio(true)
       }
-      if(x> 9 && z < 56 && changeAudio){
+      if(x < -9 && z > 56 && changeAudio){
          audio(true)
+         
       }
 
     }
@@ -152,9 +153,9 @@ const Controls = (props: triggerProps) => {
       lightRef1.current.target.position.z = -5;
       lightRef1.current.shadow.bias = 0.0001;
       //Light 2
-      lightRef2.current.intensity = 40;
+      lightRef2.current.intensity = 65;
       lightRef2.current.angle = 0.35 + Math.sin(time * 950) * 0.0012;
-      lightRef2.current.distance = 35;
+      lightRef2.current.distance = 45;
       lightRef2.current.decay = 2.25;
       lightRef2.current.penumbra = 0.1;
       flashRef.current.add(lightRef2.current);
@@ -162,10 +163,10 @@ const Controls = (props: triggerProps) => {
       lightRef2.current.target.position.z = -3;
       lightRef2.current.shadow.bias = 0.0001;
       //Light 3
-      lightRef3.current.intensity = 150;
+      lightRef3.current.intensity = 200;
       lightRef3.current.angle = 0.25;
-      lightRef3.current.distance = 35;
-      lightRef3.current.decay = 2.5;
+      lightRef3.current.distance = 45;
+      lightRef3.current.decay = 2.25;
       lightRef3.current.penumbra = 0.5;
       flashRef.current.add(lightRef3.current);
       flashRef.current.add(lightRef3.current.target);
