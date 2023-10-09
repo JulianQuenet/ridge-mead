@@ -13,7 +13,7 @@ interface triggerProps {
 }
 
 export function Walls(props: triggerProps) {
-  const { scene, nodes, materials }: any = useGLTF("/wallsPillars.glb");
+  const { scene, nodes, materials }: any = useGLTF("/wallsPillars1.glb");
   const { room, support } = props;
 
   useEffect(() => {
@@ -28,6 +28,36 @@ export function Walls(props: triggerProps) {
 
   return (
     <group dispose={null}>
+     {/* <group position={[0.899, 0.107, 48.293]} rotation={[-Math.PI / 2, 0, 0]} scale={[43.928, 37.939, 44.599]}>
+        <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+          <group position={[7.731, 3.308, 2.861]} scale={0.545}>
+            <mesh geometry={nodes.blood_container_low_blood_container_non_sculpt_0.geometry} material={materials['blood_container_non_sculpt.001']} />
+            <mesh geometry={nodes.blood_container_low_blood_container_sculpt_0.geometry} material={materials['blood_container_sculpt.001']} />
+          </group>
+          <group position={[7.097, -0.056, -2.936]} rotation={[0, -0.422, 0]} scale={0.766}>
+            <mesh geometry={nodes.polySurface22_chair_0.geometry} material={materials['chair.001']} position={[0.788, 0, 1.653]} rotation={[0, -0.244, 0]} />
+          </group>
+          <mesh geometry={nodes.blood_extractor_blood_extractor1_0.geometry} material={materials['blood_extractor1.001']} position={[2.153, 3.63, -0.766]} rotation={[1.509, -0.042, -1.891]} scale={0.09} />
+          <mesh geometry={nodes.cabinet_1_cabinet_0.geometry} material={materials['cabinet.001']} />
+          <mesh geometry={nodes.cabinet_3_cabinet_0.geometry} material={materials['cabinet.001']} position={[-1.052, 0, -4.296]} rotation={[0, 0.325, 0]} />
+          <mesh geometry={nodes.combinedwindow_glass_0.geometry} material={materials['glass.001']} />
+          <mesh geometry={nodes.combinedwindow_window_0.geometry} material={materials['window.001']} />
+          <mesh geometry={nodes.corkboard_cork_board_0.geometry} material={materials['cork_board.001']} />
+          <mesh geometry={nodes.cup_of_noodles_noodles_0.geometry} material={materials['noodles.001']} />
+          <mesh geometry={nodes.dissection_table_dissection_table1_0.geometry} material={materials['dissection_table1.001']} position={[1.135, 0.444, -1.627]} scale={0.631} />
+          <mesh geometry={nodes.kindey_ash_tray_complete_ashtray_0.geometry} material={materials['ashtray.001']} position={[4.439, 3.539, -0.981]} rotation={[-0.007, -0.356, 0.071]} scale={0.162} />
+          <mesh geometry={nodes.microwave_microwave1_0.geometry} material={materials['microwave1.001']} position={[7.046, 2.966, -4.037]} rotation={[0, -1.321, 0]} scale={0.808} />
+          <mesh geometry={nodes.roombase_room_0.geometry} material={materials['room.001']} scale={[0.973, 1, 1]} />
+          <mesh geometry={nodes.surgical_lamp_lamp_0.geometry} material={materials['lamp.001']} />
+        </group>
+      </group>
+
+      <group position={[-3.201, 0.107, 48.293]} rotation={[-Math.PI / 2, 0, 3.091]} scale={[43.928, 37.939, 44.599]}>
+        <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+          <mesh geometry={nodes.combinedwindow_window_0001.geometry} material={materials['window.002']} position={[-9.929, 0, -2.671]} />
+        </group>
+      </group> */}
+
       {support && (
         <RigidBody type="fixed" colliders={"trimesh"}>
           <group
@@ -102,4 +132,4 @@ export function Walls(props: triggerProps) {
   );
 }
 
-useGLTF.preload("/wallsPillars.glb");
+useGLTF.preload("/wallsPillars1.glb");
