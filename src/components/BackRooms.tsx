@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { MeshStandardMaterial } from "three";
 import { PositionalAudio } from "@react-three/drei";
+import { buffer } from 'three/examples/jsm/nodes/Nodes.js';
 import * as THREE from "three";
 
 
@@ -39,7 +40,9 @@ export function Backrooms(props: triggerProps) {
  useEffect(()=>{
   if(soundRef.current){
    console.log(soundRef.current.position) 
-   soundRef.current.position.z = -2
+   soundRef.current.position.x = 102
+   soundRef.current.setRolloffFactor(7.5)
+  soundRef.current.setBuffer(buffer)
   }
   
  }, [door])
@@ -111,9 +114,10 @@ export function Backrooms(props: triggerProps) {
         { !audio && <PositionalAudio 
         autoplay
         load={THREE.AudioLoader}
-        url={"./sounds/talking-people-2-6400.mp3"}
+        url={"./sounds/people-talking-in-small-room-6064.mp3"}
         listener={listener}
         ref={soundRef}
+        loop={false}
         position={[0, 0, -2]}
         /> }
         </mesh>

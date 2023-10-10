@@ -108,13 +108,13 @@ const Controls = (props: triggerProps) => {
         }, 3500)
         setBringDoor(true)
       }
-      if(z > 45 && bringDoor){
+      if(z > 30 && bringDoor){
          door(true)
          setChangeAudio(true)
       }
       if(x < -9 && z > 56 && changeAudio){
          audio(true)
-         
+         nurse(false)
       }
 
     }
@@ -155,7 +155,7 @@ const Controls = (props: triggerProps) => {
       //Light 2
       lightRef2.current.intensity = 65;
       lightRef2.current.angle = 0.35 + Math.sin(time * 950) * 0.0012;
-      lightRef2.current.distance = 45;
+      lightRef2.current.distance = 40;
       lightRef2.current.decay = 2.25;
       lightRef2.current.penumbra = 0.1;
       flashRef.current.add(lightRef2.current);
@@ -165,7 +165,7 @@ const Controls = (props: triggerProps) => {
       //Light 3
       lightRef3.current.intensity = 200;
       lightRef3.current.angle = 0.25;
-      lightRef3.current.distance = 45;
+      lightRef3.current.distance = 40;
       lightRef3.current.decay = 2.25;
       lightRef3.current.penumbra = 0.5;
       flashRef.current.add(lightRef3.current);

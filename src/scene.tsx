@@ -41,7 +41,7 @@ const Scene = (props:triggerProps) => {
       </RigidBody>}
       
 
-      <Walls room={room} support={support}/>
+      <Walls audio={audio} room={room} support={support}/>
     </>
   );
 };
