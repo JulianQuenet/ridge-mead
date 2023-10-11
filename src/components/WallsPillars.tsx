@@ -92,16 +92,21 @@ export function Walls(props: triggerProps) {
         rotation={[Math.PI, 0, -Math.PI / 2]}
         scale={[2, 1, 0.961]}
       >
-        <RigidBody type="fixed" colliders={"trimesh"}>
+        {<RigidBody type="fixed" colliders={"trimesh"}>
           <mesh
             geometry={nodes["F-material001"].geometry}
             material={materials["walls.001"]}
           />
-        </RigidBody>
+        </RigidBody>}
+
+
+       { <>
         {/* <RigidBody type='fixed' colliders={"trimesh"}>
           <mesh geometry={nodes['F-material001_2'].geometry} material={materials['walls.002']} />
           </RigidBody>
         <mesh geometry={nodes['F-material001_1'].geometry} material={materials['board.001']} /> */}
+        </>}
+        
       </group>
 
       {room && (
