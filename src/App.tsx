@@ -15,6 +15,7 @@ function App() {
   const [nurse, setNurse] = useState<Boolean>(false);
   const [door, setDoor] = useState<Boolean>(false);
   const [changeAudio, setChangeAudio] = useState<Boolean>(false);
+  const [ soccer, setSoccer] = useState<Boolean>(false);
 
   const handleStart = () => {
     setStart(true);
@@ -25,6 +26,7 @@ function App() {
     setNurse(false);
     setDoor(false);
     setChangeAudio(false);
+    setSoccer(false)
   };
 
   return (
@@ -35,7 +37,7 @@ function App() {
             {/* <ambientLight intensity={1}/> */}
 
             <color attach="background" args={["black"]} />
-            <Physics>
+            <Physics debug>
               <Controls
                 pic={setJohnny}
                 writing={setNothing}
@@ -44,6 +46,7 @@ function App() {
                 nurse={setNurse}
                 door={setDoor}
                 audio={setChangeAudio}
+                bringBall={setSoccer}
               />
               <Scene
                 door={door}
@@ -53,6 +56,7 @@ function App() {
                 room={integ}
                 support={pillars}
                 audio={changeAudio}
+                soccer={soccer}
               />
             </Physics>
           </Canvas>

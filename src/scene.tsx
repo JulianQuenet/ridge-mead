@@ -15,12 +15,13 @@ interface triggerProps{
   helper : Boolean;
   door: Boolean;
   audio: Boolean;
+  soccer: Boolean;
 }
 
 
 
 const Scene = (props:triggerProps) => {
-  const {pic, writing, room, support, helper, door, audio} = props
+  const {pic, writing, room, support, helper, door, audio, soccer} = props
 
   return (
     <>
@@ -41,7 +42,7 @@ const Scene = (props:triggerProps) => {
       </RigidBody>}
       
 
-      <Walls audio={audio} room={room} support={support}/>
+      <Walls room={room} support={support} soccer={soccer}/>
     </>
   );
 };
