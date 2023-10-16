@@ -37,7 +37,7 @@ function App() {
             {/* <ambientLight intensity={1}/> */}
 
             <color attach="background" args={["black"]} />
-            <Physics debug>
+            <Physics>
               <Controls
                 pic={setJohnny}
                 writing={setNothing}

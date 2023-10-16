@@ -119,7 +119,7 @@ const Controls = (props: triggerProps) => {
          nurse(false)
          setSoccer(true)
       }
-      if(x> 3 && z > 50 && soccer){
+      if(x > 0 && soccer){
         bringBall(true)
       }
 
