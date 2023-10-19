@@ -212,7 +212,7 @@ const Controls = (props: triggerProps) => {
         colliders={"ball"}
         args={[2, 2, 2]}
       >
-        <Capsule castShadow args={[0.48, 0.4, 0.4]}>
+        <Capsule args={[0.48, 0.4, 0.4]}>
           <meshStandardMaterial />
          { canPlay && <PositionalAudio
             autoplay

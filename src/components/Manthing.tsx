@@ -7,26 +7,48 @@ Source: https://sketchfab.com/3d-models/manthing-afad51522f28489aa4ce7f50caf0cf6
 Title: ManThing
 */
 
-// import  { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import  { useEffect, useRef } from 'react'
+import { useGLTF, useAnimations} from '@react-three/drei'
+import { useFrame, useThree } from '@react-three/fiber'
 
 export function Goul() {
+  
+  const group = useRef<any>()
+  const goul = useRef<any>()
+  const { nodes, materials, animations }:any = useGLTF('/manthing.glb')
+  const { actions, names, mixer } = useAnimations(animations, group)
+  const { camera } = useThree();
 
-  const { nodes, materials }:any = useGLTF('/manthing.glb')
-  // const { actions } = useAnimations(animations, group)
+
+useEffect(()=>{
+ actions[names[0]]?.reset().fadeIn(0.5).play()
+ mixer.timeScale = 0.65
+ if(goul.current){
+  console.log(goul.current)
+ }
+}, [])
+
+useFrame(()=>{//Get the guide to look a the camera with each frame
+  goul.current.lookAt(camera.position.x, 0, camera.position.z)
+})
+
+
   return (
-    <group dispose={null} position={[-10,1,40]}>
+    <>
+    <group ref={goul} dispose={null} position={[-10,0.25, 40]}>
       <group name="Sketchfab_Scene">
-        <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={0.096}>
+        <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={0.1255}>
           <group name="c31a3c0dade54384aac39eaa092444cefbx" rotation={[Math.PI / 2, 0, 0]}>
             <group name="Object_2">
               <group name="RootNode">
-                <group name="Object_4">
+                <group ref={group} name="Object_4">
                   <primitive object={nodes._rootJoint} />
                   <group name="Object_6" position={[0, 11.337, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={3.303} />
                   <group name="Manthing" position={[0, 11.337, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={3.303} />
                   <group name="Base_Human" rotation={[Math.PI / 2, 1.571, 0]} />
-                  <skinnedMesh name="Object_7" geometry={nodes.Object_7.geometry} material={materials['02_-_Default']} skeleton={nodes.Object_7.skeleton} />
+                  <mesh >
+                    <skinnedMesh name="Object_7" geometry={nodes.Object_7.geometry} material={materials['02_-_Default']} skeleton={nodes.Object_7.skeleton} />
+                    </mesh>
                 </group>
               </group>
             </group>
@@ -34,6 +56,8 @@ export function Goul() {
         </group>
       </group>
     </group>
+    </>
+    
   )
 }
 
