@@ -5,6 +5,9 @@ import { Nurse } from "./components/Nurse";
 import { NurseHead } from "./components/NurseHead";
 import { SideRoom } from "./components/SideRoom";
 import { Walls } from "./components/WallsPillars";
+import { Toy } from "./components/Old_toy";
+// import { Goul } from "./components/Manthing";
+
 
 
 interface triggerProps{
@@ -41,8 +44,12 @@ const Scene = (props:triggerProps) => {
         <SideRoom writing ={writing}/>
       </RigidBody>}
       
-
+       
+       <RigidBody><Toy soccer={soccer}/></RigidBody>
+       
       <Walls room={room} support={support} soccer={soccer}/>
+
+      {/* <Goul/> */}
     </>
   );
 };

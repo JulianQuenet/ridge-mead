@@ -161,10 +161,6 @@ export function Walls(props: triggerProps) {
           url="./sounds/game.mp3"
           />
      </mesh>}
-
-
-
-
     </group>
   );
 }
