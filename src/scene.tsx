@@ -49,7 +49,9 @@ const Scene = (props:triggerProps) => {
        
       <Walls room={room} support={support} soccer={soccer}/>
 
-      <Goul/>
+      { false && 
+        <Goul/>
+        }
     </>
   );
 };
