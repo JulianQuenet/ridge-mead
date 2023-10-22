@@ -1,4 +1,3 @@
-
 import { RigidBody } from "@react-three/rapier";
 import { Backrooms } from "./components/BackRooms";
 import { Nurse } from "./components/Nurse";
@@ -7,7 +6,6 @@ import { SideRoom } from "./components/SideRoom";
 import { Walls } from "./components/WallsPillars";
 import { Toy } from "./components/Old_toy";
 import { Goul } from "./components/Manthing";
-
 
 
 interface triggerProps{
@@ -22,7 +20,6 @@ interface triggerProps{
 }
 
 
-
 const Scene = (props:triggerProps) => {
   const {pic, writing, room, support, helper, door, audio, soccer} = props
 
@@ -32,7 +29,7 @@ const Scene = (props:triggerProps) => {
         <Backrooms pic={pic} door={door} audio={audio}/>
       </RigidBody>
 
-     { helper &&  <RigidBody lockTranslations colliders="trimesh"> 
+     { helper &&  <RigidBody lockTranslations colliders="cuboid"> 
         <Nurse />  
       </RigidBody>}
 
