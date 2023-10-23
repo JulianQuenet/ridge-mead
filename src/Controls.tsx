@@ -20,10 +20,11 @@ interface triggerProps{
   door: any;
   audio: any;
   bringBall: any;
+  wall:any;
 }
 
 const Controls = (props: triggerProps) => {
-  const {pic, writing, room, pillars, nurse, door, audio, bringBall} = props
+  const {pic, writing, room, pillars, nurse, door, audio, bringBall, wall} = props
 
   const [canPlay, setCanPlay] = useState<any>(false);
   const [changeRoom, setChangeRoom] = useState<Boolean>(false)
@@ -32,6 +33,7 @@ const Controls = (props: triggerProps) => {
   const [bringDoor, setBringDoor] = useState<Boolean>(false)
   const [changeAudio, setChangeAudio] = useState<Boolean>(false)
   const [soccer, setSoccer] = useState<Boolean>(false)
+  const [startEnd, setStartEnd] = useState<Boolean>(false)
   const walking = "./sounds/footsteps.mp3"
   const backGround = "./sounds/deepSpace.mp3"
   const soundRef1 = useRef<any>();
@@ -121,6 +123,11 @@ const Controls = (props: triggerProps) => {
       }
       if(x > 0 && soccer){
         bringBall(true)
+        setStartEnd(true)
+        wall(true)
+      }
+      if(x<9 && z < 49 && startEnd){
+        wall(false)
       }
 
     }

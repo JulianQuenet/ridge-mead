@@ -14,11 +14,12 @@ interface triggerProps {
   room: Boolean;
   support: Boolean;
   soccer: Boolean;
+  wall: Boolean;
 }
 
 export function Walls(props: triggerProps) {
   const { scene, nodes, materials }: any = useGLTF("/wallsPillars1.glb");
-  const { room, support, soccer } = props;
+  const { room, support, soccer, wall } = props;
   const [once, setOnce] = useState<Boolean>(true);
   const ballRef = useRef<any>();
   const soundRef = useRef<any>();
@@ -34,7 +35,7 @@ export function Walls(props: triggerProps) {
 
   useFrame(() => {
     if (soccer && once && ballRef.current) {
-      ballRef.current.setLinvel({ x: 0, z: 1, y: 0 }, true);
+      ballRef.current.setLinvel({ x: 0, z: 0.95, y: 0 }, true);
       setTimeout(() => {
         setOnce(false);
       }, 100);
@@ -82,7 +83,7 @@ export function Walls(props: triggerProps) {
         rotation={[Math.PI, 0, -Math.PI / 2]}
         scale={[2, 1, 0.961]}
       >
-        {!soccer && (
+        {!wall && (
           <RigidBody type="fixed" colliders={"trimesh"}>
             <mesh
               geometry={nodes["F-material001"].geometry}
@@ -91,7 +92,7 @@ export function Walls(props: triggerProps) {
           </RigidBody>
         )}
 
-        {soccer && (
+        {wall && (
           <>
             <RigidBody type="fixed" colliders={"trimesh"}>
               <mesh
@@ -161,6 +162,27 @@ export function Walls(props: triggerProps) {
           url="./sounds/game.mp3"
           />
      </mesh>}
+
+     { support && <RigidBody type="fixed" colliders="trimesh">
+          <group
+            position={[-3.85, 0, 26.63]}
+            rotation={[-Math.PI / 2, 0, 4.685]}
+            scale={[1.85, 1, 1.9]}
+          >
+            <mesh
+              geometry={nodes.Glass_Door002_Glass_0.geometry}
+              material={materials.Glass}
+            />
+            <mesh
+              geometry={nodes.Glass_Door002_Metal_0.geometry}
+              material={materials.Metal}
+            />
+          </group>
+        </RigidBody>}
+
+
+
+
     </group>
   );
 }

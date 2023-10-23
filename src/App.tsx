@@ -16,6 +16,7 @@ function App() {
   const [door, setDoor] = useState<Boolean>(false);
   const [changeAudio, setChangeAudio] = useState<Boolean>(false);
   const [ soccer, setSoccer] = useState<Boolean>(false);
+  const [wall, setWall] = useState<Boolean>(false);
 
   const handleStart = () => {
     setStart(true);
@@ -27,6 +28,7 @@ function App() {
     setDoor(false);
     setChangeAudio(false);
     setSoccer(false)
+    setWall(false)
   };
 
   return (
@@ -47,6 +49,7 @@ function App() {
                 door={setDoor}
                 audio={setChangeAudio}
                 bringBall={setSoccer}
+                wall={setWall}
               />
               <Scene
                 door={door}
@@ -57,6 +60,7 @@ function App() {
                 support={pillars}
                 audio={changeAudio}
                 soccer={soccer}
+                wall={wall}
               />
             </Physics>
           </Canvas>
