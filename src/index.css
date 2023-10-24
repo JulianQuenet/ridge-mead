@@ -13,6 +13,11 @@
     padding: 0;
   }
 
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
   .start-button{
     background-color: transparent;
     border-radius: 10px;
@@ -35,5 +40,20 @@
     border-left-color: black;
     border-bottom-color: rgb(87, 84, 84);
     border-right-color: grey;
+  }
+
+  .end-text{
+    color: white;
+    width: 800px;
+    text-wrap: wrap;
+    animation: fadeIn 1.5s linear ;
+    font-size: small;
+  }
+  li{
+    padding:10px;
+  }
+  ul{
+    list-style: none;
+    padding: 20px;
   }
 

@@ -40,7 +40,7 @@ export function Walls(props: triggerProps) {
         setOnce(false);
       }, 100);
      soundRef.current.setBuffer(buffer)
-     soundRef.current.setRolloffFactor(8.5)
+     soundRef.current.setRolloffFactor(3.5)
     }
   });
  const listener = new THREE.AudioListener();
@@ -126,7 +126,7 @@ export function Walls(props: triggerProps) {
             <mesh
             geometry={nodes.defaultMaterial.geometry}
             material={materials["defaultMat.001"]}
-            position={[-6.5, 1.5, 44.316]}
+            position={[-6.5, 1.5, 48.25]}
             scale={0.1875}
           />
 
@@ -163,7 +163,7 @@ export function Walls(props: triggerProps) {
           />
      </mesh>}
 
-     { support && <RigidBody type="fixed" colliders="trimesh">
+     { soccer && <RigidBody type="fixed" colliders="trimesh">
           <group
             position={[-3.85, 0, 26.63]}
             rotation={[-Math.PI / 2, 0, 4.685]}

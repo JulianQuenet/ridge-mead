@@ -7,14 +7,15 @@ Source: https://sketchfab.com/3d-models/manthing-afad51522f28489aa4ce7f50caf0cf6
 Title: ManThing
 */
 
-import  { useEffect, useRef } from 'react'
-import { useGLTF, useAnimations} from '@react-three/drei'
+import  { useEffect, useRef, useState } from 'react'
+import { useGLTF, useAnimations, PositionalAudio} from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { RigidBody } from '@react-three/rapier'
 import * as THREE from "three";
 
+
 export function Goul() {
-  
+  const [audio, setAudio] = useState<Boolean>(false)
   const group = useRef<any>()
   const goul = useRef<any>()
   const goulCollider = useRef<any>()
@@ -25,13 +26,16 @@ export function Goul() {
   const frontVector = new THREE.Vector3();
   const sideVector = new THREE.Vector3();
 
-
 useEffect(()=>{
  actions[names[0]]?.reset().fadeIn(0.5).play()
- mixer.timeScale = 0.65
+ mixer.timeScale = 1
  if(goul.current){
   console.log(goul.current)
  }
+ setAudio(true)
+ setTimeout(()=>{
+ setAudio(false)
+ }, 15200)
 }, [])
 
 useFrame(()=>{//Get the guide to look a the camera with each frame
@@ -60,7 +64,7 @@ useFrame(()=>{//Get the guide to look a the camera with each frame
     <>
     <RigidBody ref={goulCollider} colliders='cuboid'> 
       <group name="Sketchfab_Scene">
-      <group ref={goul} dispose={null} position={[-10,0.5, 40]}>
+      <group ref={goul} dispose={null} position={[-15,0.5, 45]}>
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={0.1255}>
           <group name="c31a3c0dade54384aac39eaa092444cefbx" rotation={[Math.PI / 2, 0, 0]}>
             <group name="Object_2">
@@ -78,6 +82,7 @@ useFrame(()=>{//Get the guide to look a the camera with each frame
         </group>
       </group>
     </group>
+    { audio && <PositionalAudio autoplay load={THREE.AudioLoader} loop={false} url={"./sounds/scream.mp3"} />}
     </RigidBody>
     </>
     

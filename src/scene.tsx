@@ -18,11 +18,13 @@ interface triggerProps{
   audio: Boolean;
   soccer: Boolean;
   wall:Boolean;
+  scream:Boolean;
+  ending:Boolean;
 }
 
 
 const Scene = (props:triggerProps) => {
-  const {pic, writing, room, support, helper, door, audio, soccer, wall} = props
+  const {pic, writing, room, support, helper, door, audio, soccer, wall, scream, ending} = props
 
   return (
     <>
@@ -43,12 +45,12 @@ const Scene = (props:triggerProps) => {
       </RigidBody>}
       
        
-       <RigidBody><Toy soccer={soccer}/></RigidBody>
+       <RigidBody><Toy soccer={soccer} scream={scream}/></RigidBody>
        
       <Walls room={room} support={support} soccer={soccer} wall={wall}/>
 
-      { false && 
-        <Goul/>
+      { ending && 
+        <Goul />
         }
     </>
   );

@@ -4,6 +4,7 @@ import Controls from "./Controls";
 import Scene from "./scene";
 
 import { Loading } from "./components/StartScreen";
+import { EndScreen } from "./components/End";
 import { useState } from "react";
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
   const [changeAudio, setChangeAudio] = useState<Boolean>(false);
   const [ soccer, setSoccer] = useState<Boolean>(false);
   const [wall, setWall] = useState<Boolean>(false);
+  const [scream, setScream] = useState<Boolean>(false);
+  const [ending, setEnding] = useState<Boolean>(false);
+  const [ fin, setFin ] = useState<Boolean>(false);
 
   const handleStart = () => {
     setStart(true);
@@ -29,11 +33,14 @@ function App() {
     setChangeAudio(false);
     setSoccer(false)
     setWall(false)
+    setScream(false)
+    setEnding(false)
+    setFin(false)
   };
 
   return (
     <>
-      {start && (
+      {(start && !fin) && (
         <>
           <Canvas shadows camera={{ fov: 50, position: [5, 3, 2] }}>
             {/* <ambientLight intensity={1}/> */}
@@ -50,6 +57,9 @@ function App() {
                 audio={setChangeAudio}
                 bringBall={setSoccer}
                 wall={setWall}
+                scream={setScream}
+                ending={setEnding}
+                fin={setFin}
               />
               <Scene
                 door={door}
@@ -61,6 +71,8 @@ function App() {
                 audio={changeAudio}
                 soccer={soccer}
                 wall={wall}
+                scream={scream}
+                ending={ending}
               />
             </Physics>
           </Canvas>
@@ -69,6 +81,7 @@ function App() {
       )}
 
       {!start && <Loading toggle={handleStart} />}
+      {fin && <EndScreen/>}
     </>
   );
 }

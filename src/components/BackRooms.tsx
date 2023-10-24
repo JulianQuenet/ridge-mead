@@ -39,7 +39,6 @@ export function Backrooms(props: triggerProps) {
 
  useEffect(()=>{
   if(soundRef.current){
-   console.log(soundRef.current.position) 
    soundRef.current.position.x = 102
    soundRef.current.setRolloffFactor(7.5)
   soundRef.current.setBuffer(buffer)
