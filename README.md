@@ -14,6 +14,7 @@ Sketchfab models:
 
 ### Video demo 
 A big thanks to Queen Faith Official for the playthrough video
-[![Watch the video](https://img.youtube.com/vi/T_b4St1bnPc?si=sYGZHNdl8lxbHmQ4/0.jpg)](https://www.youtube.com/watch?v=T_b4St1bnPc?si=sYGZHNdl8lxbHmQ4)
+[![Link to video](https://img.youtube.com/vi/T_b4St1bnPc/0.jpg)](https://youtu.be/T_b4St1bnPc?si=p4RtUdA8IhADM5r2)
+
 
 
