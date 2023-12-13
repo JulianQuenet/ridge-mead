@@ -2,7 +2,9 @@
 
 This repository will serve as a preview/demo, decided to finish off the project in Unity, the games gets a bit laggy
 when importing all the needed assests/models so this is just an unfished preview of a much bigger project, but at the moment 
-the game is exclusively exploratory, the game takes about a minute or to so to load but the preview can be viewed here : https://ridge-mead.netlify.app/.
+the game is exclusively exploratory, the game takes about a minute or to so to load.
+
+Preview can be viewed here : https://ridge-mead.netlify.app/
 Alternatively here is the itch.io link for the game : https://jamesq15.itch.io/ridge-mead
 
 ## Credits 
@@ -12,7 +14,7 @@ Sketchfab models:
 - Body bags by Red => https://sketchfab.com/3d-models/covered-dead-bodies-003c0710251d4ea795b716161e201746
 
 
-## Video demo A big thanks to Queen Faith Official for the playthrough video
+## Video demo,  A big thanks to Queen Faith Official for the playthrough video
 
 [![Link to video](https://img.youtube.com/vi/T_b4St1bnPc/0.jpg)](https://youtu.be/T_b4St1bnPc?si=p4RtUdA8IhADM5r2)
 
