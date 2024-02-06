@@ -254,13 +254,11 @@ const Controls = (props: triggerProps) => {
             <PositionalAudio
               autoplay
               ref={soundRef1}
-              load={THREE.AudioLoader}
               url={walking}
             />
           )}
           <PositionalAudio
             autoplay
-            load={THREE.AudioLoader}
             url={backGround}
             listener={listener}
             ref={soundRef2}
@@ -268,7 +266,6 @@ const Controls = (props: triggerProps) => {
           {piano && (
             <PositionalAudio
               autoplay
-              load={THREE.AudioLoader}
               url={"./sounds/piano.mp3"}
               listener={listener}
               loop={false}

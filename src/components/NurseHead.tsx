@@ -33,7 +33,7 @@ export function NurseHead() {
        <mesh  ref={nurseHead}> 
         <mesh  castShadow geometry={nodes.hat_lp_hat_0005_2.geometry} material={materials['material.006']} />
         <mesh castShadow geometry={nodes.hat_lp_hat_0005_3.geometry} material={materials['body.007']} />
-        <PositionalAudio ref={ref} autoplay load={THREE.AudioLoader} url={sounds} listener={listener}/>
+        <PositionalAudio ref={ref} autoplay url={sounds} listener={listener}/>
         </mesh>
       </group>
     </group>

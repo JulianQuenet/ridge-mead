@@ -158,7 +158,6 @@ export function Walls(props: triggerProps) {
           ref={soundRef}
           loop={false}
           listener={listener}
-          load={THREE.AudioLoader}
           url="./sounds/game.mp3"
           />
      </mesh>}

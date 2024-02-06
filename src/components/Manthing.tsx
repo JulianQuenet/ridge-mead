@@ -82,7 +82,7 @@ useFrame(()=>{//Get the guide to look a the camera with each frame
         </group>
       </group>
     </group>
-    { audio && <PositionalAudio autoplay load={THREE.AudioLoader} loop={false} url={"./sounds/scream.mp3"} />}
+    { audio && <PositionalAudio autoplay loop={false} url={"./sounds/scream.mp3"} />}
     </RigidBody>
     </>
     

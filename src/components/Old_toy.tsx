@@ -3,7 +3,7 @@
 import { PositionalAudio, useGLTF } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useRef } from 'react'
-import * as THREE from "three"
+
 
 interface toyProps{
   soccer: Boolean
@@ -38,7 +38,7 @@ export function Toy(props:toyProps) {
     <group position={[-4.497, 0.998, 0]} rotation={[-Math.PI / 2, 0, 0]}>
       <group rotation={[Math.PI / 2, 28.25, 0]}>
         <mesh>
-        { scream && <PositionalAudio autoplay load={THREE.AudioLoader} loop={false} url={"./sounds/horror.mp3"} />}
+        { scream && <PositionalAudio autoplay loop={false} url={"./sounds/horror.mp3"} />}
         <mesh geometry={nodes.defaultMaterial001.geometry} material={materials.defaultMaterial} />
         <mesh geometry={nodes.defaultMaterial.geometry} material={materials.material} />
         </mesh>

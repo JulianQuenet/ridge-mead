@@ -112,7 +112,6 @@ export function Backrooms(props: triggerProps) {
          
         { !audio && <PositionalAudio 
         autoplay
-        load={THREE.AudioLoader}
         url={"./sounds/people-talking-in-small-room-6064.mp3"}
         listener={listener}
         ref={soundRef}
